@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="url">jdbc:postgresql://localhost:5432/moodle</entry>
+	<entry key="user">lucasfriasmoodle</entry>
+	<entry key="pass">luquitas</entry>
+	<entry key="driverClass">org.postgresql.Driver</entry>
+</properties>
