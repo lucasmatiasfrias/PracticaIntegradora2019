@@ -22,7 +22,8 @@ public class ConnectionProperties {
 	}
 
 	public String getProperty(String key) throws IOException {
-		return getConnProp().prop.getProperty(key);
+		getConnProp();
+		return prop.getProperty(key);
 	}
 
 	public static synchronized ConnectionProperties getConnProp() throws IOException {

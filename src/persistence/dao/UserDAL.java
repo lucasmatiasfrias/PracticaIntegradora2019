@@ -1,69 +1,124 @@
 package persistence.dao;
 
+import static persistence.connection.ConnectionProperties.getConnProp;
+
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.User;
 
-public class UserDAL extends CRUD<User> {
+import dto.UserDTO;
+import persistence.connection.DBConnection;
 
-	private final String SELECT_ALL_USERS = "SELECT id,firstname, lastname, email, city FROM mdl_user";
-	private final String INSERT_USER = "INSERT INTO mdl_user (id,firstname,lastname,email,city) VALUES (?,?,?,?,?)";
+public final class UserDAL extends CRUD<UserDTO> {
+	
+	private static UserDAL dal;
 
-	public UserDAL() throws IOException, ClassNotFoundException, SQLException {
-		super();
+	private UserDAL() {
+		tableName = "students";
+		selectAll = "SELECT file, dni, firstname, lastname, email, gender FROM " + tableName;
+		selectByFile = selectAll + " WHERE file=?";
+		insert = "INSERT INTO " + tableName + " (file, dni, firstname, lastname, email, gender) VALUES (?,?,?,?,?,?)";
+		update = "UPDATE " + tableName + " SET dni=?, firstname=?, lastname=?, email=?, gender=? WHERE file=?";
+		delete = "DELETE FROM " + tableName + " WHERE file=?";
 	}
 
-	@Override
-	public List<User> getAll() {
-		List<User> users = new ArrayList<User>();
-		try {
-			PreparedStatement ps = conn.prepareStatement(SELECT_ALL_USERS);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				users.add(new User(rs.getInt("id"), rs.getString("firstname"), rs.getString("lastname"),
-						rs.getString("email"), rs.getString("city")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public static UserDAL getUserDAL() {
+		if(dal==null)
+			dal=new UserDAL();
+		return dal;
+	}
+	
+	public List<UserDTO> get(int id) throws SQLException, ClassNotFoundException, IOException {
+		Connection conn = new DBConnection(getConnProp()).getConnection();
+		List<UserDTO> ts = new ArrayList<UserDTO>();
+		PreparedStatement ps = conn.prepareStatement(this.selectByFile);
+		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			ts.add(fromRsToDto(rs));
 		}
-		return users;
+		rs.close();
+		ps.close();
+		conn.close();
+		return ts;
 	}
 
-	@Override
-	public void create(User alumno) {
-		try {
-			PreparedStatement ps = conn.prepareStatement(INSERT_USER);
-			ps.setInt(1, alumno.getFile());
-			ps.setString(2, alumno.getFirstname());
-			ps.setString(3, alumno.getLastname());
-			ps.setString(4, alumno.getEmail());
-			ps.setString(5, alumno.getCity());
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public List<UserDTO> getAll() throws SQLException, ClassNotFoundException, IOException {
+		Connection conn = new DBConnection(getConnProp()).getConnection();
+		List<UserDTO> ts = new ArrayList<UserDTO>();
+		PreparedStatement ps = conn.prepareStatement(this.selectAll);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			ts.add(fromRsToDto(rs));
 		}
+		rs.close();
+		ps.close();
+		conn.close();
+		return ts;
+	}
+
+	public int create(UserDTO t) throws SQLException, ClassNotFoundException, IOException {
+		Connection conn = new DBConnection(getConnProp()).getConnection();
+		PreparedStatement ps = conn.prepareStatement(this.insert);
+		fromDtoToInsertStm(t, ps);
+		int r = ps.executeUpdate();
+		ps.close();
+		conn.close();
+		return r;
+	}
+
+	public int delete(int id) throws SQLException, ClassNotFoundException, IOException {
+		Connection conn = new DBConnection(getConnProp()).getConnection();
+		PreparedStatement ps = conn.prepareStatement(this.delete);
+		ps.setInt(1, id);
+		int r = ps.executeUpdate();
+		ps.close();
+		conn.close();
+		return r;
+	}
+
+	public int update(int id, UserDTO newT) throws SQLException, ClassNotFoundException, IOException {
+		Connection conn = new DBConnection(getConnProp()).getConnection();
+		PreparedStatement ps = conn.prepareStatement(this.update);
+		fromDtoToUpdateStm(id, newT, ps);
+		int r = ps.executeUpdate();
+		ps.close();
+		conn.close();
+		return r;
 	}
 
 	@Override
-	public void delete(int id) {
-		// TODO Auto-generated method stub
-
+	protected UserDTO fromRsToDto(ResultSet rs) throws SQLException {
+		Integer file = rs.getInt("file");
+		Integer dni = rs.getInt("dni");
+		String firstname = rs.getString("firstname");
+		String lastname = rs.getString("lastname");
+		String email = rs.getString("email");
+		String gender = rs.getString("gender");
+		return new UserDTO(file, dni, firstname, lastname, email, gender);
 	}
 
 	@Override
-	public void update(int id, User newT) {
-		// TODO Auto-generated method stub
-
+	protected void fromDtoToInsertStm(UserDTO t, PreparedStatement ps) throws SQLException {
+		ps.setInt(1, t.getFile());
+		ps.setInt(2, t.getDni());
+		ps.setString(3, t.getFirstname());
+		ps.setString(4, t.getLastname());
+		ps.setString(5, t.getEmail());
+		ps.setString(6, t.getGender());
 	}
 
-	@Override
-	public User get(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected void fromDtoToUpdateStm(int id, UserDTO t, PreparedStatement ps) throws SQLException {
+		ps.setInt(1, t.getDni());
+		ps.setString(2, t.getFirstname());
+		ps.setString(3, t.getLastname());
+		ps.setString(4, t.getEmail());
+		ps.setString(5, t.getGender());
+		ps.setInt(6, id);
 	}
 
 }

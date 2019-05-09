@@ -5,8 +5,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.postgresql.Driver;
-
 public class DBConnection {
 
 	private static String url;
@@ -22,6 +20,7 @@ public class DBConnection {
 	}
 
 	public Connection getConnection() throws SQLException, ClassNotFoundException {
+		Class.forName(driverClass);
 		return DriverManager.getConnection(url, user, pass);
 	}
 
@@ -60,5 +59,14 @@ public class DBConnection {
 			ex.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static void main(String []a) {
+		try {
+			new DBConnection(ConnectionProperties.getConnProp());
+			System.out.println("conecto");
+		} catch (Exception e) {
+			System.out.println("no conecto");
+		} 
 	}
 }

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
+import dto.UserDTO;
 import persistence.dao.UserDAL;
 
 /**
@@ -47,15 +47,15 @@ public class AddUser extends HttpServlet {
 
 		// Recordar controlar los datos que recibo de request
 
-		User user = new User(Integer.parseInt(request.getParameter("legajo")), request.getParameter("nombre"),
-				request.getParameter("apellido"), request.getParameter("email"),request.getParameter("city"));
+		UserDTO user = new UserDTO(Integer.parseInt(request.getParameter("legajo")),Integer.parseInt(request.getParameter("dni")) ,request.getParameter("nombre"),
+				request.getParameter("apellido"), request.getParameter("email"),request.getParameter("genero"));
 		try {
-			new UserDAL().create(user);
+			UserDAL.getUserDAL().create(user);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		response.sendRedirect("/PracticaIntegradora/Alumnos?status=1");
+		response.sendRedirect("./Alumnos?status=1");
 	}
 
 }

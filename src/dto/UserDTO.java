@@ -2,40 +2,51 @@ package dto;
 
 public class UserDTO {
 
-	private int file;
-	private String firtname;
+	private Integer file;
+	private Integer dni;
+	private String firstname;
 	private String lastname;
 	private String email;
-	private String city;
-	
-	public int getFile() {
+	private String gender;
+	private Double approvalPercentage;
+
+	public UserDTO(Integer file, Integer dni, String firstname, String lastname, String email, String gender) {
+		this.file = file;
+		this.dni = dni;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.gender = gender;
+	}
+
+	public Integer getFile() {
 		return file;
 	}
-	public void setFile(int file) {
-		this.file = file;
+
+	public Integer getDni() {
+		return dni;
 	}
-	public String getFirtname() {
-		return firtname;
+
+	public String getFirstname() {
+		return firstname;
 	}
-	public void setFirtname(String firtname) {
-		this.firtname = firtname;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	public String getLastname() {
 		return lastname;
 	}
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+
+	public String getEmail() {
+		return email;
 	}
-	public String getCity() {
-		return city;
+
+	public String getGender() {
+		return this.gender;
 	}
-	public void setCity(String city) {
-		this.city = city;
+
+	public Double getApprovalPercentage() {
+		return approvalPercentage;
+	}
+	public void setApprovalPercentage(Double approvalPercentage) {
+		this.approvalPercentage=approvalPercentage;
 	}
 }

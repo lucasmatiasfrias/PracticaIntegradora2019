@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.User;
+import dto.UserDTO;
 import persistence.dao.UserDAL;
 
 /**
@@ -33,14 +33,14 @@ public class Users extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		List<User> alumnos;
+		List<UserDTO> alumnos;
 		try {
-			alumnos = new UserDAL().getAll();
+			alumnos = UserDAL.getUserDAL().getAll();
 			request.setAttribute("ALUMNOS", alumnos);
 			request.setAttribute("STATUS", request.getParameter("status"));
 			getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		

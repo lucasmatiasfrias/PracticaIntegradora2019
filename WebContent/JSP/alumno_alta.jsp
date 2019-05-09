@@ -1,40 +1,82 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<title>Listado de alumnos UNPAZ</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="Listado de alumnos de UNPAZ">
-	<meta name="keywords" content="Alumnos,UNPAZ,Listado">
-	<meta name="author" content="Practica Integradora Team">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!--Inicio CDN Boostrap-->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!--Fin CDN Boostrap-->
+
+<title>Alta de Alumno UNPAZ</title>
+<meta charset="UTF-8">
+<meta name="description" content="Alta de alumno de UNPAZ">
+<meta name="keywords" content="Alumnos,UNPAZ,Alta">
+<meta name="author" content="Practica Integradora Team">
 </head>
 <body>
-	
+	<div class="page-header"
+		style="background-color: #107aa3; color: #107aa3">
+		<h1>header</h1>
+	</div>
+
+	<div class="page-header" style="background-color: #f2f2f2">
+		<img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
+			style="width: 15%">
+	</div>
+
+	<div class="container">
 	<h1>Alta de alumno</h1>
-	
+
 	<c:if test="${STATUS == 0}">
 		<h3>Error al guardar!!</h3>
 	</c:if>
-	
-	<form action="/UNPAZ/AlumnoAlta" method="post">
-		<label for="">Legajo</label>
-		<input type="number" min="1" max="9999" required name="legajo" placeholder="Solo números" >
-		<br>
-		<label for="">Nombre</label>
-		<input type="text" name="nombre" required>
-		<br>
-		<label for="">Apellido</label>
-		<input type="text" name="apellido" required>
-		<br>
-		<label for="">Email</label>
-		<input type="email" name="email" required>
-		<br>
-		<label for="">DNI</label>
-		<input type="number" name="dni" required>
-		<br>
-		<input type="submit" value="Enviar">
+
+	<form action="./AlumnoAlta" method="post">
+		<div class="form-group">
+			<label for="">Legajo</label> <input class="form-control" type="number" min="1" max="9999"
+				required name="legajo" placeholder="Solo números">
+		</div>
+		<div class="form-group">
+			<label for="">DNI</label> <input class="form-control" type="number" min="1" max="99999999"
+				required name="dni" placeholder="Solo números">
+		</div>
+		<div class="form-group">
+			<label for="">Nombre</label> <input class="form-control" type="text" name="nombre"
+				required>
+		</div>
+		<div class="form-group">
+			<label for="">Apellido</label> <input class="form-control" type="text" name="apellido"
+				required>
+		</div>
+		<div class="form-group">
+			<label for="">Email</label> <input class="form-control" type="email" name="email" required>
+		</div>
+		<div class="form-group">
+			<label for="">Género</label> <input class="form-control" type="text" name="genero"
+				required>
+		</div>
+		<button type="submit" class="btn btn-primary">Enviar</button>
 	</form>
-	<a href="/UNPAZ/Alumnos">Volver</a>
+	</div>
 	
+	<a href="../">Volver</a>
+
+	<div class="page-footer" style="background-color: #107aa3">
+		<div class="row">
+			<div class="col-sm-12">
+				<p style="padding-left: 2%; padding-top: 1%">
+					<strong>Maquetación Web: </strong>Lucas Frías
+			</div>
+		</div>
+	</div>
 </body>
 </html>

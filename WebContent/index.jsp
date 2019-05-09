@@ -16,10 +16,10 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--Fin CDN Boostrap-->
 
-<title>Listado de alumnos UNPAZ</title>
+<title>Sistema de Alumnos UNPAZ</title>
 <meta charset="UTF-8">
-<meta name="description" content="Listado de alumnos de UNPAZ">
-<meta name="keywords" content="Alumnos,UNPAZ,Listado">
+<meta name="description" content="Alta de alumno de UNPAZ">
+<meta name="keywords" content="Alumnos,UNPAZ,Alta">
 <meta name="author" content="Practica Integradora Team">
 </head>
 <body>
@@ -33,37 +33,10 @@
 			style="width: 15%">
 	</div>
 
-	<div class="container">
-	<h1>Listado de alumnos</h1>
-
-	<c:if test="${STATUS == 1}">
-		<h3>Se registró correctamente :)</h3>
-	</c:if>
-
-	<a href="./AlumnoAlta">Nuevo alumno</a>
-	<table class="table table-bordered table-striped table-dark">
-		<tr>
-			<th>Legajo</th>
-			<th>DNI</th>
-			<th>Nombre</th>
-			<th>Apellido</th>
-			<th>Email</th>
-			<th>Género</th>
-		</tr>
-		<c:forEach var="alumno" items="${ALUMNOS}">
-			<tr>
-				<td><c:out value="${alumno.getFile()}" /></td>
-				<td><c:out value="${alumno.getDni()}" /></td>
-				<td><c:out value="${alumno.getFirstname()}" /></td>
-				<td><c:out value="${alumno.getLastname()}" /></td>
-				<td><c:out value="${alumno.getEmail()}" /></td>
-				<td><c:out value="${alumno.getGender()}" /></td>
-			</tr>
-		</c:forEach>
-	</table>
-	</div>
-
-	<a href="./">Volver</a>
+	<h1>Bienvenidos al Sistema Único de Alumnos de UNPAZ</h1>
+	<p>
+		<a href="./Alumnos">Ir a listado de alumnos</a>
+	</p>
 
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">

@@ -1,29 +1,34 @@
 package persistence.dao;
 
 import java.io.IOException;
-import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import persistence.connection.ConnectionProperties;
-import persistence.connection.DBConnection;
 
 public abstract class CRUD<T> {
-	protected Connection conn;
-	protected ConnectionProperties prop;
+	
+	protected String tableName;
+	protected String selectAll;
+	protected String selectByFile;
+	protected String delete;
+	protected String update;
+	protected String insert;
 
-	public CRUD() throws IOException, ClassNotFoundException, SQLException {
-		prop = ConnectionProperties.getConnProp();
-		conn = new DBConnection(prop).getConnection();
-	}
+	public abstract List<T> get(int id) throws SQLException, ClassNotFoundException, IOException;
+	
+	public abstract List<T> getAll() throws SQLException, ClassNotFoundException, IOException;
 
-	public abstract List<T> getAll();
+	public abstract int create(T t) throws SQLException, ClassNotFoundException, IOException;
 
-	public abstract void create(T t);
+	public abstract int delete(int id) throws SQLException, ClassNotFoundException, IOException;
 
-	public abstract void delete(int id);
+	public abstract int update(int id, T newT) throws SQLException, ClassNotFoundException, IOException;
 
-	public abstract void update(int id, T newT);
+	protected abstract T fromRsToDto(ResultSet rs) throws SQLException;
 
-	public abstract T get(int id);
+	protected abstract void fromDtoToInsertStm(T t, PreparedStatement ps) throws SQLException;
+	
+	protected abstract void fromDtoToUpdateStm(int id, T t, PreparedStatement ps) throws SQLException;
 
 }

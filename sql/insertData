@@ -1,0 +1,9 @@
+INSERT INTO public.students(
+	file, dni, firstname, lastname, email, gender)
+	VALUES (1, 38168744, 'Lucas', 'Frías', 'lucasmatiasfrias@live.com', 'masculino');
+INSERT INTO public.students(
+	file, dni, firstname, lastname, email, gender)
+	VALUES (2, 38168745, 'Pepe', 'Pompin', 'pepepompin@live.com', 'masculino');
+INSERT INTO public.students(
+	file, dni, firstname, lastname, email, gender)
+	VALUES (3, 38168746, 'Josefa', 'Anacleta', 'josefulamodernu@live.com', 'femenino');
