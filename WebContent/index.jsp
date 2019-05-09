@@ -29,13 +29,13 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
-			style="width: 15%">
+		<a href="./"><img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
+			style="width: 15%"></a>
 	</div>
 
 	<h1>Bienvenidos al Sistema Único de Alumnos de UNPAZ</h1>
 	<p>
-		<a href="./Alumnos">Ir a listado de alumnos</a>
+		<a class="btn btn-primary" href="./Alumnos">Ir a listado de alumnos</a>
 	</p>
 
 	<div class="page-footer" style="background-color: #107aa3">

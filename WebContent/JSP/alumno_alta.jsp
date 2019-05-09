@@ -29,8 +29,8 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
-			style="width: 15%">
+		<a href="./"><img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
+			style="width: 15%"></a>
 	</div>
 
 	<div class="container">
@@ -64,11 +64,10 @@
 			<label for="">Género</label> <input class="form-control" type="text" name="genero"
 				required>
 		</div>
-		<button type="submit" class="btn btn-primary">Enviar</button>
+		<button type="submit" class="btn btn-primary">Guardar</button>
 	</form>
 	</div>
-	
-	<a href="../">Volver</a>
+
 
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">

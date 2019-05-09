@@ -1,0 +1,21 @@
+-- Table: public.student
+
+-- DROP TABLE public.student;
+
+CREATE TABLE public.student
+(
+    file bigint NOT NULL,
+    dni bigint NOT NULL,
+    firstname character varying COLLATE pg_catalog."default" NOT NULL,
+    lastname character varying COLLATE pg_catalog."default" NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    gender character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT students_pkey PRIMARY KEY (file)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.student
+    OWNER to lucasfrias;

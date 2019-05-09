@@ -18,7 +18,7 @@ public final class UserDAL extends CRUD<UserDTO> {
 	private static UserDAL dal;
 
 	private UserDAL() {
-		tableName = "students";
+		tableName = "student";
 		selectAll = "SELECT file, dni, firstname, lastname, email, gender FROM " + tableName;
 		selectByFile = selectAll + " WHERE file=?";
 		insert = "INSERT INTO " + tableName + " (file, dni, firstname, lastname, email, gender) VALUES (?,?,?,?,?,?)";

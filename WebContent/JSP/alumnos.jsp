@@ -29,41 +29,51 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
-			style="width: 15%">
+		<a href="./"><img class="mr-3" src="./res/unpaz.png"
+			alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
 	<div class="container">
-	<h1>Listado de alumnos</h1>
+		<h1>Listado de alumnos</h1>
 
-	<c:if test="${STATUS == 1}">
-		<h3>Se registró correctamente :)</h3>
-	</c:if>
+		<c:if test="${STATUS == 1}">
+			<div class="alert alert-success" role="alert">La operación se
+				ejecutó correctamente :)</div>
 
-	<a href="./AlumnoAlta">Nuevo alumno</a>
-	<table class="table table-bordered table-striped table-dark">
-		<tr>
-			<th>Legajo</th>
-			<th>DNI</th>
-			<th>Nombre</th>
-			<th>Apellido</th>
-			<th>Email</th>
-			<th>Género</th>
-		</tr>
-		<c:forEach var="alumno" items="${ALUMNOS}">
+		</c:if>
+
+		<a class="btn btn-primary" href="./AlumnoAlta">Nuevo alumno</a>
+		<table class="table table-bordered table-striped table-dark">
 			<tr>
-				<td><c:out value="${alumno.getFile()}" /></td>
-				<td><c:out value="${alumno.getDni()}" /></td>
-				<td><c:out value="${alumno.getFirstname()}" /></td>
-				<td><c:out value="${alumno.getLastname()}" /></td>
-				<td><c:out value="${alumno.getEmail()}" /></td>
-				<td><c:out value="${alumno.getGender()}" /></td>
+				<th>Legajo</th>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Email</th>
+				<th>Género</th>
+				<th>Acciones</th>
 			</tr>
-		</c:forEach>
-	</table>
+			<c:forEach var="alumno" items="${ALUMNOS}">
+				<tr>
+					<td><c:out value="${alumno.getFile()}" /></td>
+					<td><c:out value="${alumno.getDni()}" /></td>
+					<td><c:out value="${alumno.getFirstname()}" /></td>
+					<td><c:out value="${alumno.getLastname()}" /></td>
+					<td><c:out value="${alumno.getEmail()}" /></td>
+					<td><c:out value="${alumno.getGender()}" /></td>
+					<td>
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<a class="btn btn-primary"
+								href="./EditUser?file=<c:out value="${alumno.getFile()}"/>"
+								role="button">Editar</a> <a class="btn btn-primary"
+								href="./DeleteUser?file=<c:out value="${alumno.getFile()}"/>"
+								role="button">Eliminar</a>
+						</div>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
-
-	<a href="./">Volver</a>
 
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">

@@ -1,21 +1,12 @@
--- Table: public.students
+-- Database: unpaz
 
--- DROP TABLE public.students;
+-- DROP DATABASE unpaz;
 
-CREATE TABLE public.students
-(
-    file bigint NOT NULL,
-    dni bigint NOT NULL,
-    firstname character varying COLLATE pg_catalog."default" NOT NULL,
-    lastname character varying COLLATE pg_catalog."default" NOT NULL,
-    email character varying COLLATE pg_catalog."default" NOT NULL,
-    gender character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT students_pkey PRIMARY KEY (file)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public.students
-    OWNER to lucasfriasmoodle;
+CREATE DATABASE unpaz
+    WITH 
+    OWNER = lucasfrias
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'es_AR.UTF-8'
+    LC_CTYPE = 'es_AR.UTF-8'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
