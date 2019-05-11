@@ -18,4 +18,4 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.student
-    OWNER to lucasfrias;
+    OWNER to lucasfriasmoodle;
