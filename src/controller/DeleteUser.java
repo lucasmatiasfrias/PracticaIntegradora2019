@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import persistence.connection.ConnectionPropertiesLoader;
-import persistence.connection.DBConnection;
+import persistence.connection.DBConnectionManager;
 import persistence.dao.UserDAL;
 
 /**
@@ -38,7 +38,7 @@ public class DeleteUser extends HttpServlet {
 			throws IOException, ServletException {
 		int id = Integer.valueOf(request.getParameter("file"));
 		try {
-			request.setAttribute("ALUMNO", UserDAL.getUserDAL(new DBConnection(ConnectionPropertiesLoader.load())).get(id).get(0));
+			request.setAttribute("ALUMNO", UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).getById(id).get(0));
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class DeleteUser extends HttpServlet {
 		int id = Integer.valueOf(request.getParameter("legajo"));
 		int r=0;
 		try {
-			r=UserDAL.getUserDAL(new DBConnection(ConnectionPropertiesLoader.load())).delete(id);
+			r=UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).delete(id);
 		} catch (IOException e) {
 			response.getWriter()
 					.append("Error con el archivo de configuración de la base de datos\n" + e.getLocalizedMessage());

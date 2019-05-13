@@ -2,18 +2,21 @@ package dto;
 
 public class UserDTO{
 	
-	private Integer file;
-	private Integer dni;
+	public static String[] avaiableGenders= {"masculino", "femenino", "no declara"};
+	
+	private String file;
+	private String dni;
 	private String firstname;
 	private String lastname;
 	private String email;
 	private String gender;
-	private Double approvalPercentage;
+	private String approvalPercentage;
 
 	public UserDTO() {
 		
 	}
-	public UserDTO(Integer file, Integer dni, String firstname, String lastname, String email, String gender) {
+	
+	public UserDTO(String file, String dni, String firstname, String lastname, String email, String gender) {
 		this.file = file;
 		this.dni = dni;
 		this.firstname = firstname;
@@ -22,16 +25,16 @@ public class UserDTO{
 		this.gender = gender;
 	}
 	
-	public Integer getFile() {
+	public String getFile() {
 		return file;
 	}
-	public void setFile(Integer file) {
+	public void setFile(String file) {
 		this.file = file;
 	}
-	public Integer getDni() {
+	public String getDni() {
 		return dni;
 	}
-	public void setDni(Integer dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 	public String getFirstname() {
@@ -58,10 +61,10 @@ public class UserDTO{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Double getApprovalPercentage() {
+	public String getApprovalPercentage() {
 		return approvalPercentage;
 	}
-	public void setApprovalPercentage(Double approvalPercentage) {
+	public void setApprovalPercentage(String approvalPercentage) {
 		this.approvalPercentage = approvalPercentage;
 	}
 	

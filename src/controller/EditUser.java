@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dto.UserDTO;
 import persistence.connection.ConnectionPropertiesLoader;
-import persistence.connection.DBConnection;
+import persistence.connection.DBConnectionManager;
 import persistence.dao.UserDAL;
 
 /**
@@ -36,7 +36,7 @@ public class EditUser extends HttpServlet {
 			throws IOException, ServletException {
 		int id = Integer.valueOf(request.getParameter("file"));
 		try {
-			request.setAttribute("ALUMNO", UserDAL.getUserDAL(new DBConnection(ConnectionPropertiesLoader.load())).get(id).get(0));
+			request.setAttribute("ALUMNO", UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).getById(id).get(0));
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,7 @@ public class EditUser extends HttpServlet {
 		try {
 			UserDTO user = new UserDTO(Integer.parseInt(request.getParameter("legajo")),Integer.parseInt(request.getParameter("dni")) ,request.getParameter("nombre"),
 					request.getParameter("apellido"), request.getParameter("email"),request.getParameter("genero"));
-			r=UserDAL.getUserDAL(new DBConnection(ConnectionPropertiesLoader.load())).update(id,user);
+			r=UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).update(id,user);
 		} catch (IOException e) {
 			response.getWriter()
 					.append("Error con el archivo de configuración de la base de datos\n" + e.getLocalizedMessage());
