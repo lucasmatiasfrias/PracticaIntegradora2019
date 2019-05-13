@@ -1,32 +1,28 @@
 package persistence.connection;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
 
-	private static String url;
-	private static String user;
-	private static String pass;
-	private static String driverClass;
+	private ConnectionProperties properties;
 
-	public DBConnection(ConnectionProperties prop) throws IOException, ClassNotFoundException {
-		url = prop.getProperty("url");
-		user = prop.getProperty("user");
-		pass = prop.getProperty("pass");
-		driverClass = prop.getProperty("driverClass");
+	public DBConnection(ConnectionProperties prop) {
+		properties = prop;
 	}
 
 	public Connection getConnection() throws SQLException, ClassNotFoundException {
-		Class.forName(driverClass);
-		return DriverManager.getConnection(url, user, pass);
+		Class.forName(properties.getDbDriverClass());
+		return DriverManager.getConnection(properties.getDbUrl(), properties.getDbUser(), properties.getDbPassword());
 	}
 
+	public void closeConnection() throws ClassNotFoundException, SQLException {
+		getConnection().close();
+	}
 	// METODOS A REFACTORIZAR
-	public static boolean createBackupLinux(String fileBackup) {
-		String executeCmd = "mysqldump -u " + user + " -p" + pass + " " + "tp2" + " -r " + fileBackup;
+	public boolean createBackupLinux(String fileBackup) {
+		String executeCmd = "mysqldump -u " + properties.getDbUser() + " -p" + properties.getDbPassword() + " " + "tp2" + " -r " + fileBackup;
 		try {
 			Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 			int processComplete;
@@ -43,10 +39,10 @@ public class DBConnection {
 		return false;
 	}
 
-	public static boolean restoreBackupLinux(String fileBackup) {
+	public boolean restoreBackupLinux(String fileBackup) {
 		try {
 			String[] executeCmd = new String[] { "/bin/sh", "-c",
-					"mysql -u" + user + " -p" + pass + " " + "tp2" + " < " + fileBackup };
+					"mysql -u" + properties.getDbUser() + " -p" + properties.getDbPassword() + " " + "tp2" + " < " + fileBackup };
 			Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
 			int processComplete = runtimeProcess.waitFor();
 			if (processComplete == 0) {
@@ -60,13 +56,14 @@ public class DBConnection {
 		}
 		return false;
 	}
-	
-	public static void main(String []a) {
-		try {
-			new DBConnection(ConnectionProperties.getConnProp());
-			System.out.println("conecto");
-		} catch (Exception e) {
-			System.out.println("no conecto");
-		} 
-	}
+
+//	public static void main(String[] a) {
+//		try {
+//			ConnectionProperties prop=ConnectionPropertiesLoader.load();
+//			new DBConnection(prop);
+//			System.out.println("conecto");
+//		} catch (Exception e) {
+//			System.out.println("no conecto");
+//		}
+//	}
 }

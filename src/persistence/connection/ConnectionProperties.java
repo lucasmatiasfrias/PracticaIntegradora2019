@@ -1,34 +1,33 @@
 package persistence.connection;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
 public class ConnectionProperties {
 
-	private Properties prop;
-	private static ConnectionProperties connProp;
-	private static final String PROPERTIES_RESOURCE_PATH = "./db-properties";
-	public static final String DB_URL_KEY = "url";
-	public static final String DB_USER_KEY = "user";
-	public static final String DB_PASSWORD_KEY = "pass";
-	public static final String DB_DRIVER_KEY = "driverClass";
-
-	private ConnectionProperties() throws IOException {
-		this.prop = new Properties();
-		this.prop
-				.loadFromXML(new FileInputStream(new File(getClass().getResource(PROPERTIES_RESOURCE_PATH).getFile())));
+	private String dbUrl;
+	private String dbUser;
+	private String dbPassword;
+	private String dbDriverClass;
+	
+	public ConnectionProperties(String dbUrl, String dbUser, String dbPassword, String dbDriverClass) {
+		this.dbUrl = dbUrl;
+		this.dbUser = dbUser;
+		this.dbPassword = dbPassword;
+		this.dbDriverClass = dbDriverClass;
 	}
 
-	public String getProperty(String key) throws IOException {
-		getConnProp();
-		return prop.getProperty(key);
+	public String getDbUrl() {
+		return dbUrl;
+	}
+	
+	public String getDbUser() {
+		return dbUser;
 	}
 
-	public static synchronized ConnectionProperties getConnProp() throws IOException {
-		if (connProp == null)
-			connProp = new ConnectionProperties();
-		return connProp;
+	public String getDbPassword() {
+		return dbPassword;
 	}
+
+	public String getDbDriverClass() {
+		return dbDriverClass;
+	}
+	
 }

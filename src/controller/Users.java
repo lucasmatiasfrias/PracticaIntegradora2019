@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.UserDTO;
-import persistence.dao.UserDAL;
+import services.UsersService;
 
 /**
  * Servlet implementation class Alumnos
@@ -28,23 +27,19 @@ public class Users extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
 		List<UserDTO> alumnos;
 		try {
-			alumnos = UserDAL.getUserDAL().getAll();
+			alumnos = UsersService.getUsers();
 			request.setAttribute("ALUMNOS", alumnos);
 			request.setAttribute("STATUS", request.getParameter("status"));
 			getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
-		} catch (ClassNotFoundException | SQLException e) {
-			
+		} catch (Exception e) {
+			request.setAttribute("EXCEPTION", e);
+			getServletContext().getRequestDispatcher("/JSP/error.jsp").forward(request, response);
 			e.printStackTrace();
 		}
-		
-		
 		
 	}
 

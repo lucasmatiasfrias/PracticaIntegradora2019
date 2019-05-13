@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sat May 11 12:21:01 ART 2019
+javax.persistence-api-2.2.jar>central=
+javax.persistence-api-2.2-sources.jar>central=
+javax.persistence-api-2.2.pom>central=

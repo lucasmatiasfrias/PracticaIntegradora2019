@@ -1,16 +1,13 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dto.UserDTO;
-import persistence.dao.UserDAL;
+import services.UsersService;
 
 /**
  * Servlet implementation class AlumnoAlta
@@ -45,17 +42,14 @@ public class AddUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Recordar controlar los datos que recibo de request
-
-		UserDTO user = new UserDTO(Integer.parseInt(request.getParameter("legajo")),Integer.parseInt(request.getParameter("dni")) ,request.getParameter("nombre"),
-				request.getParameter("apellido"), request.getParameter("email"),request.getParameter("genero"));
 		try {
-			UserDAL.getUserDAL().create(user);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+			UsersService.addUser(request);
+			response.sendRedirect("./Alumnos?status=1");
+		} catch (Exception e) {
+			response.sendRedirect("./Alumnos?status=0");
 			e.printStackTrace();
 		}
-		response.sendRedirect("./Alumnos?status=1");
+
 	}
 
 }
