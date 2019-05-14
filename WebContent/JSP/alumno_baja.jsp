@@ -44,7 +44,7 @@
 			</h3>
 		</c:if>
 
-		<form action="./DeleteUser" method="post">
+		<form action="./AlumnoBaja" method="post">
 			<div class="form-group">
 				<label for="">Legajo</label> <input class="form-control"
 					type="number" min="1" max="9999" readonly name="legajo"

@@ -32,11 +32,15 @@ public class DBConnectionManager {
 	public static void main(String[] a) {
 		try {
 			ConnectionProperties prop=ConnectionPropertiesLoader.load();
-			Connection c=DBConnectionManager.getConnection(prop);
-			c.close();
-			System.out.println(c==DBConnectionManager.getConnection(prop));
-			System.out.println("conecto");
+			Connection []c=new Connection[50];
+			boolean b=false;
+			for (Connection connection : c) {
+				connection=DBConnectionManager.getConnection(prop);
+				System.out.println(connection.toString());
+			}
+			System.out.println("Iguales: "+b);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("no conecto");
 		}
 	}

@@ -26,7 +26,7 @@ public class DeleteUser extends HttpServlet {
 			throws IOException, ServletException {
 		try {
 			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
-			if (existing.isEmpty()) {
+			if (!existing.isEmpty()) {
 				request.setAttribute("ALUMNO", existing.get(0));
 				getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
 			}
@@ -40,7 +40,7 @@ public class DeleteUser extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
-			if (existing.isEmpty()) {
+			if (!existing.isEmpty()) {
 				if(UsersService.deleteUser(existing.get(0)))
 					response.sendRedirect("./Alumnos?status=1");
 			}
