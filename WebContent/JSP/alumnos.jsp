@@ -64,9 +64,9 @@
 					<td>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<a class="btn btn-primary"
-								href="./AlumnoEditar?file=<c:out value="${alumno.getFile()}"/>"
+								href="./AlumnoEditar?legajo=<c:out value="${alumno.getFile()}"/>"
 								role="button">Editar</a> <a class="btn btn-primary"
-								href="./AlumnoBaja?file=<c:out value="${alumno.getFile()}"/>"
+								href="./AlumnoBaja?legajo=<c:out value="${alumno.getFile()}"/>"
 								role="button">Eliminar</a>
 						</div>
 					</td>

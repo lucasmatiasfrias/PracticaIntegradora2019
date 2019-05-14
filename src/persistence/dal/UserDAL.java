@@ -1,4 +1,4 @@
-package persistence.dao;
+package persistence.dal;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -17,12 +17,12 @@ public final class UserDAL extends CRUD<User> {
 	
 	private UserDAL(Connection conn) {
 		this.conn=conn;
-		tableNameQuery = "student";
-		selectAllQuery = "SELECT file, dni, firstname, lastname, email, gender FROM " + tableNameQuery;
+		dbTableName = "student";
+		selectAllQuery = "SELECT file, dni, firstname, lastname, email, gender FROM " + dbTableName;
 		selectByIdQuery = selectAllQuery + " WHERE file=?";
-		insertQuery = "INSERT INTO " + tableNameQuery + " (file, dni, firstname, lastname, email, gender) VALUES (?,?,?,?,?,?)";
-		updateQuery = "UPDATE " + tableNameQuery + " SET dni=?, firstname=?, lastname=?, email=?, gender=? WHERE file=?";
-		deleteQuery = "DELETE FROM " + tableNameQuery + " WHERE file=?";
+		insertQuery = "INSERT INTO " + dbTableName + " (file, dni, firstname, lastname, email, gender) VALUES (?,?,?,?,?,?)";
+		updateQuery = "UPDATE " + dbTableName + " SET dni=?, firstname=?, lastname=?, email=?, gender=? WHERE file=?";
+		deleteQuery = "DELETE FROM " + dbTableName + " WHERE file=?";
 	}
 
 	public static UserDAL getUserDAL(Connection conn) throws SQLException {

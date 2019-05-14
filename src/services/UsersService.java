@@ -15,8 +15,8 @@ import dto.UserDTO;
 import model.User;
 import persistence.connection.ConnectionPropertiesLoader;
 import persistence.connection.DBConnectionManager;
-import persistence.dao.CRUD;
-import persistence.dao.UserDAL;
+import persistence.dal.CRUD;
+import persistence.dal.UserDAL;
 
 public class UsersService {
 
@@ -81,8 +81,7 @@ public class UsersService {
 			CRUD<User> dal = UserDAL.getUserDAL(conn);
 			List<User> users = dal.getById(Integer.valueOf(user.getFile()));
 			if(!users.isEmpty()) {
-				dal.update(users.get(0));
-				b=true;
+				b=dal.delete(new User(user))!=0;
 			}
 			conn.close();
 		}

@@ -29,7 +29,7 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="./"><img class="mr-3" src="./res/unpaz.png"
+		<a href="./"><img class="mr-3" src="/res/unpaz.png"
 			alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 

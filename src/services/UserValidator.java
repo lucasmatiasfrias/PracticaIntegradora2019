@@ -13,7 +13,7 @@ public class UserValidator extends RegexValidator {
 	}
 
 	public static boolean isName(String s) {
-		return isAlphabeticalString(s) && s.length() < 40;
+		return isAlphabeticalString(s) && s.length() < 50;
 	}
 
 	public static boolean isGender(String s) {
@@ -28,4 +28,5 @@ public class UserValidator extends RegexValidator {
 		}
 		return b;
 	}
+
 }

@@ -1,4 +1,4 @@
-package persistence.dao;
+package persistence.dal;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract class CRUD<T> {
 
-	protected String tableNameQuery;
+	protected String dbTableName;
 
 	protected String selectAllQuery;
 	protected String selectByIdQuery;

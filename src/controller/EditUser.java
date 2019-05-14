@@ -24,8 +24,9 @@ public class EditUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		try {
-			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
+			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
 			if (!existing.isEmpty()) {
+				System.out.println(existing.get(0).toString());
 				request.setAttribute("ALUMNO", existing.get(0));
 				getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
 			}
@@ -38,7 +39,7 @@ public class EditUser extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
+			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
 			if (!existing.isEmpty()) {
 				UserDTO newUser=existing.get(0);
 				newUser.setDni(request.getParameter("dni"));
