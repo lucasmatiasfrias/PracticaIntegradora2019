@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.UserDTO;
+import model.User;
 
-public final class UserDAL extends CRUD<UserDTO> {
+public final class UserDAL extends CRUD<User> {
 	
 	private static UserDAL dal;
 	private Connection conn;
@@ -31,8 +31,8 @@ public final class UserDAL extends CRUD<UserDTO> {
 		return dal;
 	}
 	
-	public List<UserDTO> getById(Integer id) throws SQLException, ClassNotFoundException, IOException {
-		List<UserDTO> users = new ArrayList<UserDTO>();
+	public List<User> getById(Integer id) throws SQLException, ClassNotFoundException, IOException {
+		List<User> users = new ArrayList<User>();
 		PreparedStatement ps = this.conn.prepareStatement(this.selectByIdQuery);
 		ps.setInt(1, id);
 		ResultSet rs = ps.executeQuery();
@@ -44,8 +44,8 @@ public final class UserDAL extends CRUD<UserDTO> {
 		return users;
 	}
 
-	public List<UserDTO> getAll() throws SQLException, ClassNotFoundException, IOException {
-		List<UserDTO> users = new ArrayList<UserDTO>();
+	public List<User> getAll() throws SQLException, ClassNotFoundException, IOException {
+		List<User> users = new ArrayList<User>();
 		PreparedStatement ps = this.conn.prepareStatement(this.selectAllQuery);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
@@ -56,7 +56,7 @@ public final class UserDAL extends CRUD<UserDTO> {
 		return users;
 	}
 
-	public int create(UserDTO t) throws SQLException, ClassNotFoundException, IOException {
+	public int create(User t) throws SQLException, ClassNotFoundException, IOException {
 		PreparedStatement ps = this.conn.prepareStatement(this.insertQuery);
 		ps.setInt(1, t.getFile());
 		ps.setInt(2, t.getDni());
@@ -69,7 +69,7 @@ public final class UserDAL extends CRUD<UserDTO> {
 		return r;
 	}
 
-	public int delete(UserDTO t) throws SQLException, ClassNotFoundException, IOException {
+	public int delete(User t) throws SQLException, ClassNotFoundException, IOException {
 		PreparedStatement ps = this.conn.prepareStatement(this.deleteQuery);
 		ps.setInt(1, t.getFile());
 		int r = ps.executeUpdate();
@@ -77,7 +77,7 @@ public final class UserDAL extends CRUD<UserDTO> {
 		return r;
 	}
 
-	public int update(UserDTO newT) throws SQLException, ClassNotFoundException, IOException {
+	public int update(User newT) throws SQLException, ClassNotFoundException, IOException {
 		PreparedStatement ps = this.conn.prepareStatement(this.updateQuery);
 		ps.setInt(1, newT.getDni());
 		ps.setString(2, newT.getFirstname());
@@ -90,14 +90,14 @@ public final class UserDAL extends CRUD<UserDTO> {
 		return r;
 	}
 
-	private UserDTO fromRsToDto(ResultSet rs) throws SQLException {
+	private User fromRsToDto(ResultSet rs) throws SQLException {
 		Integer file = rs.getInt("file");
 		Integer dni = rs.getInt("dni");
 		String firstname = rs.getString("firstname");
 		String lastname = rs.getString("lastname");
 		String email = rs.getString("email");
 		String gender = rs.getString("gender");
-		return new UserDTO(file, dni, firstname, lastname, email, gender);
+		return new User(file, dni, firstname, lastname, email, gender);
 	}
 
 }

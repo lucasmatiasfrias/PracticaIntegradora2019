@@ -12,16 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import dto.UserDTO;
 import services.UsersService;
 
-/**
- * Servlet implementation class Alumnos
- */
 @WebServlet("/Alumnos")
 public class Users extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public Users() {
         super();
         // TODO Auto-generated constructor stub
@@ -37,7 +31,7 @@ public class Users extends HttpServlet {
 			getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 		} catch (Exception e) {
 			request.setAttribute("EXCEPTION", e);
-			getServletContext().getRequestDispatcher("/JSP/error.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("/JSP/error.jsp?msg="+e.getLocalizedMessage()).forward(request, response);
 			e.printStackTrace();
 		}
 		

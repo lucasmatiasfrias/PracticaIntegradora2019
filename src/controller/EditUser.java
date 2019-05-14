@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,55 +10,49 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.UserDTO;
-import persistence.connection.ConnectionPropertiesLoader;
-import persistence.connection.DBConnectionManager;
-import persistence.dao.UserDAL;
+import services.UsersService;
 
-/**
- * Servlet implementation class EditUser
- */
-@WebServlet("/EditUser")
+@WebServlet("/AlumnoEditar")
 public class EditUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EditUser() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public EditUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		int id = Integer.valueOf(request.getParameter("file"));
 		try {
-			request.setAttribute("ALUMNO", UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).getById(id).get(0));
-		} catch (ClassNotFoundException | SQLException e) {
+			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
+			if (existing.isEmpty()) {
+				request.setAttribute("ALUMNO", existing.get(0));
+				getServletContext().getRequestDispatcher("/alumno_modificacion.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-		request.setAttribute("STATUS", request.getParameter("status"));
-		getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		int id = Integer.valueOf(request.getParameter("legajo"));
-		int r=0;
 		try {
-			UserDTO user = new UserDTO(Integer.parseInt(request.getParameter("legajo")),Integer.parseInt(request.getParameter("dni")) ,request.getParameter("nombre"),
-					request.getParameter("apellido"), request.getParameter("email"),request.getParameter("genero"));
-			r=UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).update(id,user);
-		} catch (IOException e) {
-			response.getWriter()
-					.append("Error con el archivo de configuración de la base de datos\n" + e.getLocalizedMessage());
-		} catch (ClassNotFoundException | SQLException e) {
-			response.getWriter().append("Error con la base de datos\n" + e.getLocalizedMessage());
+			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
+			if (existing.isEmpty()) {
+				UserDTO newUser=existing.get(0);
+				newUser.setDni(request.getParameter("dni"));
+				newUser.setFirstname(request.getParameter("nombre"));
+				newUser.setLastname(request.getParameter("apellido"));
+				newUser.setEmail(request.getParameter("email"));
+				newUser.setGender(request.getParameter("genero"));
+				if(UsersService.updateUser(newUser))
+					response.sendRedirect("./Alumnos?status=1");
+			}
+		} catch (Exception e) {
+			request.setAttribute("EXCEPTION", e);
+			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
+			e.printStackTrace();
 		}
-		response.sendRedirect("./Alumnos?status="+r);
 	}
 }

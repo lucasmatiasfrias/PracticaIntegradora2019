@@ -1,7 +1,7 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,57 +9,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import persistence.connection.ConnectionPropertiesLoader;
-import persistence.connection.DBConnectionManager;
-import persistence.dao.UserDAL;
+import dto.UserDTO;
 
-/**
- * Servlet implementation class DeleteUser
- */
-@WebServlet("/DeleteUser")
+import services.UsersService;
+
+@WebServlet("/AlumnoBaja")
 public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public DeleteUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @throws IOException
-	 * @throws ServletException
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		int id = Integer.valueOf(request.getParameter("file"));
 		try {
-			request.setAttribute("ALUMNO", UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).getById(id).get(0));
-		} catch (ClassNotFoundException | SQLException e) {
+			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
+			if (existing.isEmpty()) {
+				request.setAttribute("ALUMNO", existing.get(0));
+				getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
+			}
+		} catch (Exception e) {
+			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-		request.setAttribute("STATUS", request.getParameter("status"));
-		getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		int id = Integer.valueOf(request.getParameter("legajo"));
-		int r=0;
 		try {
-			r=UserDAL.getUserDAL(new DBConnectionManager(ConnectionPropertiesLoader.load())).delete(id);
-		} catch (IOException e) {
-			response.getWriter()
-					.append("Error con el archivo de configuración de la base de datos\n" + e.getLocalizedMessage());
-		} catch (ClassNotFoundException | SQLException e) {
-			response.getWriter().append("Error con la base de datos\n" + e.getLocalizedMessage());
+			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("file"));
+			if (existing.isEmpty()) {
+				if(UsersService.deleteUser(existing.get(0)))
+					response.sendRedirect("./Alumnos?status=1");
+			}
+		} catch (Exception e) {
+			request.setAttribute("EXCEPTION", e);
+			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
+			e.printStackTrace();
 		}
-		response.sendRedirect("./Alumnos?status="+r);
 	}
-
 }

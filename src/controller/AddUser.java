@@ -10,16 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import dto.UserDTO;
 import services.UsersService;
 
-/**
- * Servlet implementation class AlumnoAlta
- */
 @WebServlet("/AlumnoAlta")
 public class AddUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public AddUser() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,13 +31,13 @@ public class AddUser extends HttpServlet {
 				request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("email"),
 				request.getParameter("genero"));
 		try {
-			UsersService.addUser(user);
-			response.sendRedirect("./Alumnos?status=1");
+			if (UsersService.addUser(user))
+				response.sendRedirect("./Alumnos?status=1");
 		} catch (Exception e) {
-			response.sendRedirect("./Alumnos?status=0");
+			request.setAttribute("EXCEPTION", e);
+			response.sendRedirect("./JSP/error.jsp?msg="+e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-
 	}
 
 }

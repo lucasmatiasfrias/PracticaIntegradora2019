@@ -15,8 +15,17 @@ public class UserValidator extends RegexValidator {
 	public static boolean isName(String s) {
 		return isAlphabeticalString(s) && s.length() < 40;
 	}
-	
+
 	public static boolean isGender(String s) {
-		
+		return isAlphabeticalString(s) && s.length() < 20 && isAnAvaiableGender(s);
+	}
+
+	private static boolean isAnAvaiableGender(String s) {
+		boolean b = false;
+		for (String gender : UserDTO.avaiableGenders) {
+			if (gender.equals(s.trim().toLowerCase()))
+				b = true;
+		}
+		return b;
 	}
 }

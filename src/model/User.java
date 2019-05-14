@@ -1,7 +1,9 @@
 package model;
 
+import dto.UserDTO;
+
 public class User {
-	
+
 	private Integer file;
 	private Integer dni;
 	private String firstname;
@@ -17,6 +19,15 @@ public class User {
 		this.lastname = lastname;
 		this.email = email;
 		this.gender = gender;
+	}
+
+	public User(UserDTO u) {
+		this.file = Integer.valueOf(u.getFile());
+		this.dni = Integer.valueOf(u.getDni());
+		this.firstname = u.getFirstname();
+		this.lastname = u.getLastname();
+		this.email = u.getEmail();
+		this.gender = u.getGender();
 	}
 
 	public Integer getFile() {
@@ -51,9 +62,16 @@ public class User {
 		this.approvalPercentage = approvalPercentage;
 	}
 
-	@Override
-	public String toString() {
-		return "User [file=" + file + ", dni=" + dni + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", email=" + email + ", gender=" + gender + ", approvalPercentage=" + approvalPercentage + "]";
+	public UserDTO toDTO() {
+//		String s1=this.file.toString();
+//		String s2=this.dni.toString();
+//		String s3=this.firstname;
+//		String s4=this.lastname;
+//		String s5=this.email;
+//		String s6=this.gender;
+//		UserDTO u= new UserDTO(s1, s2, s3, s4, s5, s6);
+//		return u;
+		return new UserDTO(this.file.toString(), this.dni.toString(), this.firstname, this.lastname, this.email,
+				this.gender);
 	}
 }

@@ -29,13 +29,15 @@ public class DBConnectionManager {
 		return runtimeProcess.waitFor() == 0;
 	}
 
-//	public static void main(String[] a) {
-//		try {
-//			ConnectionProperties prop=ConnectionPropertiesLoader.load();
-//			new DBConnection(prop);
-//			System.out.println("conecto");
-//		} catch (Exception e) {
-//			System.out.println("no conecto");
-//		}
-//	}
+	public static void main(String[] a) {
+		try {
+			ConnectionProperties prop=ConnectionPropertiesLoader.load();
+			Connection c=DBConnectionManager.getConnection(prop);
+			c.close();
+			System.out.println(c==DBConnectionManager.getConnection(prop));
+			System.out.println("conecto");
+		} catch (Exception e) {
+			System.out.println("no conecto");
+		}
+	}
 }
