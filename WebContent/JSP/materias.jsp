@@ -16,7 +16,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--Fin CDN Boostrap-->
 
-<title>Listado de alumnos UNPAZ</title>
+<title>Listado de materias UNPAZ</title>
 <meta charset="UTF-8">
 <meta name="description" content="Listado de alumnos de UNPAZ">
 <meta name="keywords" content="Alumnos,UNPAZ,Listado">
@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="container">
-		<h1>Listado de alumnos</h1>
+		<h1>Listado de materias</h1>
 
 		<c:if test="${STATUS == 1}">
 			<div class="alert alert-success" role="alert">La operación se
@@ -42,31 +42,23 @@
 
 		</c:if>
 
-		<a class="btn btn-primary" href="./AlumnoAlta">Nuevo alumno</a>
+		<a class="btn btn-primary" href="./MateriaAlta">Nueva Materia</a>
 		<table class="table table-bordered table-striped table-dark">
 			<tr>
-				<th>Legajo</th>
-				<th>DNI</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>Email</th>
-				<th>Género</th>
+				<th>Codigo de Materia</th>
+				<th>Descripcion</th>
 				<th>Acciones</th>
 			</tr>
-			<c:forEach var="alumno" items="${ALUMNOS}">
+			<c:forEach var="materia" items="${MATERIAS}">
 				<tr>
-					<td><c:out value="${alumno.getFile()}" /></td>
-					<td><c:out value="${alumno.getDni()}" /></td>
-					<td><c:out value="${alumno.getFirstname()}" /></td>
-					<td><c:out value="${alumno.getLastname()}" /></td>
-					<td><c:out value="${alumno.getEmail()}" /></td>
-					<td><c:out value="${alumno.getGender()}" /></td>
+					<td><c:out value="${materia.getId()}" /></td>
+					<td><c:out value="${materia.getDescription()}" /></td>
 					<td>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 							<a class="btn btn-primary"
-								href="./AlumnoEditar?legajo=<c:out value="${alumno.getFile()}"/>"
+								href="./MateriaEditar?id=<c:out value="${materia.getId()}"/>"
 								role="button">Editar</a> <a class="btn btn-primary"
-								href="./AlumnoBaja?legajo=<c:out value="${alumno.getFile()}"/>"
+								href="./MateriaBaja?id=<c:out value="${materia.getId()}"/>"
 								role="button">Eliminar</a>
 						</div>
 					</td>

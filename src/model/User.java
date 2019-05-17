@@ -63,14 +63,6 @@ public class User {
 	}
 
 	public UserDTO toDTO() {
-//		String s1=this.file.toString();
-//		String s2=this.dni.toString();
-//		String s3=this.firstname;
-//		String s4=this.lastname;
-//		String s5=this.email;
-//		String s6=this.gender;
-//		UserDTO u= new UserDTO(s1, s2, s3, s4, s5, s6);
-//		return u;
 		return new UserDTO(this.file.toString(), this.dni.toString(), this.firstname, this.lastname, this.email,
 				this.gender);
 	}

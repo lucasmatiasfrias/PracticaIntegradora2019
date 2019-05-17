@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +31,7 @@ public class DeleteUser extends HttpServlet {
 				getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
+			request.setAttribute("EXCEPTION", e);
 			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
 			e.printStackTrace();
 		}

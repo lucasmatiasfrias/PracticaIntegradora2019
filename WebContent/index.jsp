@@ -37,6 +37,9 @@
 	<p>
 		<a class="btn btn-primary" href="./Alumnos">Ir a listado de alumnos</a>
 	</p>
+	<p>
+		<a class="btn btn-primary" href="./Materias">Ir a listado de materias</a>
+	</p>
 
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">

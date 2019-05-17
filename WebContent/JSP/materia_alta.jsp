@@ -16,7 +16,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--Fin CDN Boostrap-->
 
-<title>Editar Alumno de UNPAZ</title>
+<title>Alta de Materia UNPAZ</title>
 <meta charset="UTF-8">
 <meta name="description" content="Alta de alumno de UNPAZ">
 <meta name="keywords" content="Alumnos,UNPAZ,Alta">
@@ -34,51 +34,23 @@
 	</div>
 
 	<div class="container">
-		<h1>Editar de alumno</h1>
+		<h1>Alta de materia</h1>
 
 		<c:if test="${STATUS == 0}">
-			<h3>
-				Error al obtener Usuario
-				<c:out value="${ALUMNO.getFile()}"></c:out>
-				!
-			</h3>
+			<h3>Error al guardar!!</h3>
 		</c:if>
 
-		<form action="./AlumnoEditar" method="post">
+		<form action="./MateriaAlta" method="post">
 			<div class="form-group">
-				<label for="">Legajo</label> <input class="form-control"
-					type="number" min="1" max="9999" readonly name="legajo"
-					value="<c:out value="${ALUMNO.getFile()}"></c:out>">
+				<label for="">Código</label> <input class="form-control"
+					type="number" min="1" max="9999999" required name="code"
+					placeholder="Solo números">
 			</div>
 			<div class="form-group">
-				<label for="">DNI</label> <input class="form-control" type="number"
-					min="1" max="99999999" required name="dni"
-					value="<c:out value="${ALUMNO.getDni()}" ></c:out>">
+				<label for="">Descripción</label> <input class="form-control" type="text"
+					required name="description">
 			</div>
-			<div class="form-group">
-				<label for="">Nombre</label> <input class="form-control" type="text"
-					name="nombre" required
-					value="<c:out value="${ALUMNO.getFirstname()}" ></c:out>">
-			</div>
-			<div class="form-group">
-				<label for="">Apellido</label> <input class="form-control"
-					type="text" name="apellido" required
-					value="<c:out value="${ALUMNO.getLastname()}" ></c:out>">
-			</div>
-			<div class="form-group">
-				<label for="">Email</label> <input class="form-control" type="email"
-					name="email" required
-					value="<c:out value="${ALUMNO.getEmail()}" ></c:out>">
-			</div>
-			<div class="form-group">
-				<label for="">Género</label><select name="genero">
-					<c:forEach var="genero" items="${GENEROS}">
-						<option value="<c:out value="${genero}" ></c:out>"><c:out
-								value="${genero}"></c:out></option>
-					</c:forEach>
-				</select>
-			</div>
-			<button type="submit" class="btn btn-primary">Actualizar</button>
+			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>
 	</div>
 

@@ -29,43 +29,50 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="./"><img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
-			style="width: 15%"></a>
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3" src="./res/unpaz.png"
+			alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
 	<div class="container">
-	<h1>Alta de alumno</h1>
+		<h1>Alta de alumno</h1>
 
-	<c:if test="${STATUS == 0}">
-		<h3>Error al guardar!!</h3>
-	</c:if>
+		<c:if test="${STATUS == 0}">
+			<h3>Error al guardar!!</h3>
+		</c:if>
 
-	<form action="./AlumnoAlta" method="post">
-		<div class="form-group">
-			<label for="">Legajo</label> <input class="form-control" type="number" min="1" max="9999"
-				required name="legajo" placeholder="Solo números">
-		</div>
-		<div class="form-group">
-			<label for="">DNI</label> <input class="form-control" type="number" min="1" max="99999999"
-				required name="dni" placeholder="Solo números">
-		</div>
-		<div class="form-group">
-			<label for="">Nombre</label> <input class="form-control" type="text" name="nombre"
-				required>
-		</div>
-		<div class="form-group">
-			<label for="">Apellido</label> <input class="form-control" type="text" name="apellido"
-				required>
-		</div>
-		<div class="form-group">
-			<label for="">Email</label> <input class="form-control" type="email" name="email" required>
-		</div>
-		<div class="form-group">
-			<label for="">Género</label> <input class="form-control" type="text" name="genero"
-				required>
-		</div>
-		<button type="submit" class="btn btn-primary">Guardar</button>
-	</form>
+		<form action="./AlumnoAlta" method="post">
+			<div class="form-group">
+				<label for="">Legajo</label> <input class="form-control"
+					type="number" min="1" max="9999" required name="legajo"
+					placeholder="Solo números">
+			</div>
+			<div class="form-group">
+				<label for="">DNI</label> <input class="form-control" type="number"
+					min="1" max="99999999" required name="dni"
+					placeholder="Solo números">
+			</div>
+			<div class="form-group">
+				<label for="">Nombre</label> <input class="form-control" type="text"
+					name="nombre" required>
+			</div>
+			<div class="form-group">
+				<label for="">Apellido</label> <input class="form-control"
+					type="text" name="apellido" required>
+			</div>
+			<div class="form-group">
+				<label for="">Email</label> <input class="form-control" type="email"
+					name="email" required>
+			</div>
+			<div class="form-group">
+				<label for="">Género</label><select name="genero">
+					<c:forEach var="genero" items="${GENEROS}">
+						<option value="<c:out value="${genero}" ></c:out>"><c:out
+								value="${genero}"></c:out></option>
+					</c:forEach>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Guardar</button>
+		</form>
 	</div>
 
 

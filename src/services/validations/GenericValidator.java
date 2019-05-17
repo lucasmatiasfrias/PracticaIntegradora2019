@@ -1,8 +1,8 @@
-package services;
+package services.validations;
 
 import static java.util.regex.Pattern.compile;
 
-public class RegexValidator {
+public class GenericValidator {
 
 	public static boolean isNumeric(String s) {
 		return compile("[0-9]*").matcher(s).matches();
@@ -13,7 +13,7 @@ public class RegexValidator {
 	}
 
 	public static boolean isAlphabeticalString(String s) {
-		return compile("[A-Za-z\\s]*").matcher(s).matches();
+		return compile("[A-Za-zñÑáéíóúÁÉÍÓÚ\\s]*").matcher(s).matches();
 	}
 
 	public static boolean isEmail(String s) {

@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,11 +26,12 @@ public class EditUser extends HttpServlet {
 		try {
 			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
 			if (!existing.isEmpty()) {
-				System.out.println(existing.get(0).toString());
 				request.setAttribute("ALUMNO", existing.get(0));
+				request.setAttribute("GENEROS", UserDTO.avaiableGenders);
 				getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
+			request.setAttribute("EXCEPTION", e);
 			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
 			e.printStackTrace();
 		}

@@ -1,9 +1,7 @@
 package services;
 
-import static services.UserValidator.isDni;
-import static services.UserValidator.isFile;
-import static services.UserValidator.isGender;
-import static services.UserValidator.isName;
+import static services.validations.UserValidator.isFile;
+import static services.validations.UserValidator.isUserValid;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -76,21 +74,16 @@ public class UsersService {
 
 	public static boolean updateUser(UserDTO user) throws ClassNotFoundException, SQLException, IOException {
 		boolean b=false;
-		if(isFile(user.getFile())) {
+		if(isUserValid(user)) {
 			Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 			CRUD<User> dal = UserDAL.getUserDAL(conn);
 			List<User> users = dal.getById(Integer.valueOf(user.getFile()));
 			if(!users.isEmpty()) {
-				b=dal.delete(new User(user))!=0;
+				b=dal.update(new User(user))!=0;
 			}
 			conn.close();
 		}
 		return b;
-	}
-	
-	private static boolean isUserValid(UserDTO user) {
-		return isFile(user.getFile()) && isDni(user.getDni()) && isName(user.getFirstname())
-				&& isName(user.getLastname()) && isGender(user.getGender());
 	}
 
 }

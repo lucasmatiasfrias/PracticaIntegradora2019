@@ -29,7 +29,7 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="./"><img class="mr-3" src="./res/unpaz.png"
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3" src="./res/unpaz.png"
 			alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
@@ -48,32 +48,32 @@
 			<div class="form-group">
 				<label for="">Legajo</label> <input class="form-control"
 					type="number" min="1" max="9999" readonly name="legajo"
-					value=<c:out value="${ALUMNO.getFile()}"></c:out>>
+					value="<c:out value="${ALUMNO.getFile()}"></c:out>">
 			</div>
 			<div class="form-group">
 				<label for="">DNI</label> <input class="form-control" type="number"
 					min="1" max="99999999" readonly name="dni"
-					value=<c:out value="${ALUMNO.getDni()}" ></c:out>>
+					value="<c:out value="${ALUMNO.getDni()}" ></c:out>">
 			</div>
 			<div class="form-group">
 				<label for="">Nombre</label> <input class="form-control" type="text"
 					name="nombre" readonly
-					value=<c:out value="${ALUMNO.getFirstname()}" ></c:out>>
+					value="<c:out value="${ALUMNO.getFirstname()}" ></c:out>">
 			</div>
 			<div class="form-group">
 				<label for="">Apellido</label> <input class="form-control"
 					type="text" name="apellido" readonly
-					value=<c:out value="${ALUMNO.getLastname()}" ></c:out>>
+					value="<c:out value="${ALUMNO.getLastname()}" ></c:out>">
 			</div>
 			<div class="form-group">
 				<label for="">Email</label> <input class="form-control" type="email"
 					name="email" readonly
-					value=<c:out value="${ALUMNO.getEmail()}" ></c:out>>
+					value="<c:out value="${ALUMNO.getEmail()}" ></c:out>">
 			</div>
 			<div class="form-group">
 				<label for="">Género</label> <input class="form-control" type="text"
 					name="genero" readonly
-					value=<c:out value="${ALUMNO.getGender()}" ></c:out>>
+					value="<c:out value="${ALUMNO.getGender()}" ></c:out>">
 			</div>
 			<button type="submit" class="btn btn-primary">Eliminar</button>
 		</form>

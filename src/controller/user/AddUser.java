@@ -1,4 +1,4 @@
-package controller;
+package controller.user;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,6 +22,7 @@ public class AddUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("STATUS", request.getParameter("status"));
+		request.setAttribute("GENEROS", UserDTO.avaiableGenders);
 		getServletContext().getRequestDispatcher("/JSP/alumno_alta.jsp").forward(request, response);
 	}
 
