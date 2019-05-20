@@ -28,10 +28,15 @@
 		<h1>header</h1>
 	</div>
 
-	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
-			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<a class="btn btn-secondary" href="./" role="button">Home</a> <a
+				class="btn btn-secondary" href="./Alumnos" role="button">Alumnos</a>
+			<a class="btn btn-secondary" href="./Materias" role="button">Materias</a>
+			<a class="btn btn-secondary" href="./Inscripciones" role="button">Inscripciones</a>
+
+		</div>
+	</nav>
 
 	<div class="container">
 		<h1>Alta de alumno</h1>
@@ -64,7 +69,8 @@
 					name="email" required>
 			</div>
 			<div class="form-group">
-				<label for="">Género</label><select name="genero">
+				<label for="">Género</label><select name="genero"
+					class="browser-default custom-select">
 					<c:forEach var="genero" items="${GENEROS}">
 						<option value="<c:out value="${genero}" ></c:out>"><c:out
 								value="${genero}"></c:out></option>
@@ -75,11 +81,11 @@
 		</form>
 	</div>
 
-
+	<br>
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">
 			<div class="col-sm-12">
-				<p style="padding-left: 2%; padding-top: 1%">
+				<p style="padding-left: 2%; padding-top: 1%; color: white;">
 					<strong>Maquetación Web: </strong>Lucas Frías
 			</div>
 		</div>

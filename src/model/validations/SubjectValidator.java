@@ -1,6 +1,6 @@
-package model.services.validations;
+package model.validations;
 
-import static model.services.validations.GenericValidator.isNumeric;
+import static model.validations.GenericValidator.isNumeric;
 
 import dto.SubjectDTO;
 

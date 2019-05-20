@@ -27,35 +27,38 @@
 		style="background-color: #107aa3; color: #107aa3">
 		<h1>header</h1>
 	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<a class="btn btn-secondary" href="./" role="button">Home</a> <a
+				class="btn btn-secondary" href="./Alumnos" role="button">Alumnos</a>
+			<a class="btn btn-secondary" href="./Materias" role="button">Materias</a>
+			<a class="btn btn-secondary" href="./Inscripciones" role="button">Inscripciones</a>
 
-	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
-			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
-	</div>
-
+		</div>
+	</nav>
 	<div class="container">
 		<h1>Baja de materia</h1>
 
 		<form action="./MateriaBaja" method="post">
 			<div class="form-group">
 				<label for="">Código</label> <input class="form-control"
-					type="number" min="1" max="9999999" required name="code"
-					readonly value='<c:out value="${MATERIA.getId()}"></c:out>'>
+					type="number" min="1" max="9999999" required name="code" readonly
+					value='<c:out value="${MATERIA.getId()}"></c:out>'>
 			</div>
 			<div class="form-group">
 				<label for="">Descripción</label> <input class="form-control"
-					type="text" required name="description"
-					readonly value='<c:out value="${MATERIA.getDescription()}"></c:out>'>
+					type="text" required name="description" readonly
+					value='<c:out value="${MATERIA.getDescription()}"></c:out>'>
 			</div>
 			<button type="submit" class="btn btn-primary">Eliminar</button>
 		</form>
 	</div>
 
-
+	<br>
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">
 			<div class="col-sm-12">
-				<p style="padding-left: 2%; padding-top: 1%">
+				<p style="padding-left: 2%; padding-top: 1%; color: white;">
 					<strong>Maquetación Web: </strong>Lucas Frías
 			</div>
 		</div>

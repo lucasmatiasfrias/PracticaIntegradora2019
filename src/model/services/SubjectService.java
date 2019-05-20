@@ -2,8 +2,8 @@ package model.services;
 
 import static model.services.ServiceOpertationResultType.Error;
 import static model.services.ServiceOpertationResultType.Success;
-import static model.services.validations.GenericValidator.isNumeric;
-import static model.services.validations.SubjectValidator.isSubjectValid;
+import static model.validations.GenericValidator.isNumeric;
+import static model.validations.SubjectValidator.isSubjectValid;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -42,11 +42,14 @@ public class SubjectService {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 				CRUD<Subject> dal = SubjectDAL.getDAL(conn);
 				List<Subject> subjects = dal.getById(Integer.valueOf(code));
-				for (Subject subject : subjects) {
-					result.getQueryResluts().add(subject.toDTO());
-				}
-				result.setResultType(Success);
-				result.setResultMsg("Se leyeron los usuarios correctamente");
+				if (!subjects.isEmpty()) {
+					for (Subject subject : subjects) {
+						result.getQueryResluts().add(subject.toDTO());
+					}
+					result.setResultType(Success);
+					result.setResultMsg("Se leyeron los usuarios correctamente");
+				}else
+					result.setResultMsg("No existe la materia con código "+ code);
 				conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();

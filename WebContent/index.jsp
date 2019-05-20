@@ -28,23 +28,39 @@
 		<h1>header</h1>
 	</div>
 
-	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="./"><img class="mr-3" src="./res/unpaz.png" alt="Logotipo Unpaz"
-			style="width: 15%"></a>
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<a class="btn btn-secondary" href="./" role="button">Home</a> <a
+				class="btn btn-secondary" href="./Alumnos" role="button">Alumnos</a>
+			<a class="btn btn-secondary" href="./Materias" role="button">Materias</a>
+			<a class="btn btn-secondary" href="./Inscripciones" role="button">Inscripciones</a>
 
-	<h1>Bienvenidos al Sistema Único de Alumnos de UNPAZ</h1>
-	<p>
-		<a class="btn btn-primary" href="./Alumnos">Ir a listado de alumnos</a>
-	</p>
-	<p>
-		<a class="btn btn-primary" href="./Materias">Ir a listado de materias</a>
-	</p>
+		</div>
+	</nav>
+
+	<div class="jumbotron">
+		<h1 class="display-4">Bienvenidos al Sistema Único de Alumnos de
+			UNPAZ!</h1>
+		<p class="lead">La intención es crear un clásico CRUD de alumnos,
+			materias e inscripciones integrando: Java EE, MVC, Persistencia en
+			Base de Datos y Tecnologías web Frontend</p>
+		<hr class="my-4">
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card" style="width: 70%;">
+					<img src="./res/unpaz_portada.png" class="card-img-top"
+						alt="portada">
+				</div>
+			</div>
+		</div>
+
+	</div>
 
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">
 			<div class="col-sm-12">
-				<p style="padding-left: 2%; padding-top: 1%">
+				<p style="padding-left: 2%; padding-top: 1%; color: white;">
 					<strong>Maquetación Web: </strong>Lucas Frías
 			</div>
 		</div>

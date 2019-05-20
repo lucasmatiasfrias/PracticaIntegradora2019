@@ -2,7 +2,7 @@ package dto;
 
 public class UserDTO{
 	
-	public static String[] avaiableGenders= {"masculino", "femenino", "no declara"};
+	public static String[] avaiableGenders= {"masculino", "femenino", "no declara","macho alfa lomo plateado"};
 	
 	private String file;
 	private String dni;

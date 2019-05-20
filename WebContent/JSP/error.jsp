@@ -27,16 +27,27 @@
 		style="background-color: #107aa3; color: #107aa3">
 		<h1>header</h1>
 	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="btn-group" role="group" aria-label="Basic example">
+			<a class="btn btn-secondary" href="./" role="button">Home</a> <a
+				class="btn btn-secondary" href="./Alumnos" role="button">Alumnos</a>
+			<a class="btn btn-secondary" href="./Materias" role="button">Materias</a>
+			<a class="btn btn-secondary" href="./Inscripciones" role="button">Inscripciones</a>
 
+		</div>
+	</nav>
 	<div class="alert alert-danger">
-		<h1><c:out value="${ERROR}"></c:out></h1>
+		<h4>
+			<c:out value="${ERROR}"></c:out>
+		</h4>
 	</div>
 	<hr>
-	<a class="btn btn-secondary" href="/PracticaIntegradoraUnpaz2019/">Volver a Home</a>
+	<a class="btn btn-secondary" href="/PracticaIntegradoraUnpaz2019/">Volver
+		a Home</a>
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">
 			<div class="col-sm-12">
-				<p style="padding-left: 2%; padding-top: 1%">
+				<p style="padding-left: 2%; padding-top: 1%; color: white;">
 					<strong>Maquetación Web: </strong>Lucas Frías
 			</div>
 		</div>

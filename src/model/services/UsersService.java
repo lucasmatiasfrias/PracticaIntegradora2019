@@ -2,8 +2,8 @@ package model.services;
 
 import static model.services.ServiceOpertationResultType.Error;
 import static model.services.ServiceOpertationResultType.Success;
-import static model.services.validations.UserValidator.isFile;
-import static model.services.validations.UserValidator.isUserValid;
+import static model.validations.UserValidator.isFile;
+import static model.validations.UserValidator.isUserValid;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -42,11 +42,14 @@ public class UsersService {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 				CRUD<User> dal = UserDAL.getDAL(conn);
 				List<User> users = dal.getById(Integer.valueOf(file));
-				for (User user : users) {
-					result.getQueryResluts().add(user.toDTO());
-				}
-				result.setResultType(Success);
-				result.setResultMsg("Se leyeron los usuarios correctamente");
+				if(!users.isEmpty()) {
+					for (User user : users) {
+						result.getQueryResluts().add(user.toDTO());
+					}
+					result.setResultType(Success);
+					result.setResultMsg("Se leyeron los usuarios correctamente");
+				}else
+					result.setResultMsg("No existe el usuario con legajo "+file);
 				conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -1,8 +1,8 @@
-package model.services.validations;
+package model.validations;
 
-import static model.services.validations.GenericValidator.isAlphabeticalString;
-import static model.services.validations.GenericValidator.isDocument;
-import static model.services.validations.GenericValidator.isNumeric;
+import static model.validations.GenericValidator.isAlphabeticalString;
+import static model.validations.GenericValidator.isDocument;
+import static model.validations.GenericValidator.isNumeric;
 
 import dto.UserDTO;
 
