@@ -1,7 +1,8 @@
-package services.validations;
+package model.services.validations;
 
-import static services.validations.GenericValidator.isAlphabeticalString;
-import static services.validations.GenericValidator.isNumeric;
+import static model.services.validations.GenericValidator.isAlphabeticalString;
+import static model.services.validations.GenericValidator.isDocument;
+import static model.services.validations.GenericValidator.isNumeric;
 
 import dto.UserDTO;
 
@@ -17,7 +18,7 @@ public class UserValidator {
 	}
 	
 	private static boolean isDni(String s) {
-		return isNumeric(s) && s.length() < 9;
+		return isDocument(s);
 	}
 
 	private static boolean isName(String s) {

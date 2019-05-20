@@ -7,9 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class EditSubject
- */
+import dto.SubjectDTO;
+import model.services.ServiceOperationResult;
+import model.services.SubjectService;
+
 @WebServlet("/MateriaEditar")
 public class EditSubject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -19,14 +20,24 @@ public class EditSubject extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		ServiceOperationResult<SubjectDTO> res = SubjectService.getSubjectByCode(request.getParameter("id"));
+		if (!res.getQueryResluts().isEmpty()) {
+			request.setAttribute("MATERIA", res.getQueryResluts().get(0));
+			getServletContext().getRequestDispatcher("/JSP/materia_modificacion.jsp").forward(request, response);
+		}else {
+			request.setAttribute("RESULTADO", res);
+			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		SubjectDTO subject = new SubjectDTO(request.getParameter("code"), request.getParameter("description"));
+		ServiceOperationResult<SubjectDTO> res = SubjectService.updateSubject(subject);
+		request.setAttribute("RESULTADO", res);
+		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
 	}
 
 }

@@ -25,7 +25,7 @@ public final class UserDAL extends CRUD<User> {
 		deleteQuery = "DELETE FROM " + dbTableName + " WHERE file=?";
 	}
 
-	public static UserDAL getUserDAL(Connection conn) throws SQLException {
+	public static UserDAL getDAL(Connection conn) throws SQLException {
 		if(dal==null||dal.conn.isClosed())
 			dal=new UserDAL(conn);
 		return dal;

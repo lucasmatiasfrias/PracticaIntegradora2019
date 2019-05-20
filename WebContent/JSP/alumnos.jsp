@@ -29,17 +29,19 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3" src="./res/unpaz.png"
-			alt="Logotipo Unpaz" style="width: 15%"></a>
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
+			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
 	<div class="container">
 		<h1>Listado de alumnos</h1>
 
-		<c:if test="${STATUS == 1}">
-			<div class="alert alert-success" role="alert">La operación se
-				ejecutó correctamente :)</div>
-
+		<c:if test="${status == 1}">
+			<div class="alert alert-info" role="alert">
+				<h1>
+					<c:out value="${RESULTADO.getResultMsg()}"></c:out>
+				</h1>
+			</div>
 		</c:if>
 
 		<a class="btn btn-primary" href="./AlumnoAlta">Nuevo alumno</a>

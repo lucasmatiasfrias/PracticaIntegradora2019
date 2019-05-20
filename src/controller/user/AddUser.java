@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.UserDTO;
-import services.UsersService;
+import model.services.ServiceOperationResult;
+import model.services.UsersService;
 
 @WebServlet("/AlumnoAlta")
 public class AddUser extends HttpServlet {
@@ -21,7 +22,6 @@ public class AddUser extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("STATUS", request.getParameter("status"));
 		request.setAttribute("GENEROS", UserDTO.avaiableGenders);
 		getServletContext().getRequestDispatcher("/JSP/alumno_alta.jsp").forward(request, response);
 	}
@@ -31,14 +31,9 @@ public class AddUser extends HttpServlet {
 		UserDTO user = new UserDTO(request.getParameter("legajo"), request.getParameter("dni"),
 				request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("email"),
 				request.getParameter("genero"));
-		try {
-			if (UsersService.addUser(user))
-				response.sendRedirect("./Alumnos?status=1");
-		} catch (Exception e) {
-			request.setAttribute("EXCEPTION", e);
-			response.sendRedirect("./JSP/error.jsp?msg="+e.getLocalizedMessage());
-			e.printStackTrace();
-		}
+		ServiceOperationResult<UserDTO> res = UsersService.addUser(user);
+		request.setAttribute("RESULTADO", res);
+		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
 	}
 
 }

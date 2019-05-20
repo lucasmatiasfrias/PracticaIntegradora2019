@@ -29,8 +29,8 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3" src="./res/unpaz.png"
-			alt="Logotipo Unpaz" style="width: 15%"></a>
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
+			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
 	<div class="container">

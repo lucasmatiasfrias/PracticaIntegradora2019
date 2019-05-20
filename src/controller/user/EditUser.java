@@ -1,8 +1,6 @@
 package controller.user;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.UserDTO;
-import services.UsersService;
+import model.services.ServiceOperationResult;
+import model.services.UsersService;
 
 @WebServlet("/AlumnoEditar")
 public class EditUser extends HttpServlet {
@@ -23,38 +22,24 @@ public class EditUser extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		try {
-			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
-			if (!existing.isEmpty()) {
-				request.setAttribute("ALUMNO", existing.get(0));
-				request.setAttribute("GENEROS", UserDTO.avaiableGenders);
-				getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
-			}
-		} catch (Exception e) {
-			request.setAttribute("EXCEPTION", e);
-			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
-			e.printStackTrace();
+		ServiceOperationResult<UserDTO> res = UsersService.getUserByFile(request.getParameter("legajo"));
+		if (!res.getQueryResluts().isEmpty()) {
+			request.setAttribute("ALUMNO", res.getQueryResluts().get(0));
+			request.setAttribute("GENEROS", UserDTO.avaiableGenders);
+			getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
+		}else {
+			request.setAttribute("RESULTADO", res);
+			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
-			if (!existing.isEmpty()) {
-				UserDTO newUser=existing.get(0);
-				newUser.setDni(request.getParameter("dni"));
-				newUser.setFirstname(request.getParameter("nombre"));
-				newUser.setLastname(request.getParameter("apellido"));
-				newUser.setEmail(request.getParameter("email"));
-				newUser.setGender(request.getParameter("genero"));
-				if(UsersService.updateUser(newUser))
-					response.sendRedirect("./Alumnos?status=1");
-			}
-		} catch (Exception e) {
-			request.setAttribute("EXCEPTION", e);
-			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
-			e.printStackTrace();
-		}
+		UserDTO user = new UserDTO(request.getParameter("legajo"), request.getParameter("dni"),
+				request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("email"),
+				request.getParameter("genero"));
+		ServiceOperationResult<UserDTO> res = UsersService.updateUser(user);
+		request.setAttribute("RESULTADO", res);
+		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
 	}
 }

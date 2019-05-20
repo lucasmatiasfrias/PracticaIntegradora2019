@@ -29,16 +29,12 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3" src="./res/unpaz.png"
-			alt="Logotipo Unpaz" style="width: 15%"></a>
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
+			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
 	<div class="container">
 		<h1>Alta de materia</h1>
-
-		<c:if test="${STATUS == 0}">
-			<h3>Error al guardar!!</h3>
-		</c:if>
 
 		<form action="./MateriaAlta" method="post">
 			<div class="form-group">
@@ -47,8 +43,8 @@
 					placeholder="Solo números">
 			</div>
 			<div class="form-group">
-				<label for="">Descripción</label> <input class="form-control" type="text"
-					required name="description">
+				<label for="">Descripción</label> <input class="form-control"
+					type="text" required name="description">
 			</div>
 			<button type="submit" class="btn btn-primary">Guardar</button>
 		</form>

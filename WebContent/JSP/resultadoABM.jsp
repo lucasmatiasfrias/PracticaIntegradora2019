@@ -16,10 +16,10 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--Fin CDN Boostrap-->
 
-<title>Error Page</title>
+<title>Resultado</title>
 <meta charset="UTF-8">
-<meta name="description" content="Alta de alumno de UNPAZ">
-<meta name="keywords" content="Alumnos,UNPAZ,Alta">
+<meta name="description" content="Listado de alumnos de UNPAZ">
+<meta name="keywords" content="Alumnos,UNPAZ,Listado">
 <meta name="author" content="Practica Integradora Team">
 </head>
 <body>
@@ -28,11 +28,26 @@
 		<h1>header</h1>
 	</div>
 
-	<div class="alert alert-danger">
-		<h1><c:out value="${ERROR}"></c:out></h1>
+	<div class="page-header" style="background-color: #f2f2f2">
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
+			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
-	<hr>
-	<a class="btn btn-secondary" href="/PracticaIntegradoraUnpaz2019/">Volver a Home</a>
+
+	<div class="container">
+		<h1>Resultado de la operación</h1>
+
+		<%-- <c:if test="${RESULTADO.getResultType().equals(services.ServiceOpertationResultType.Success)}"> --%>
+			<div class="alert alert-info" role="alert">
+				<h4>
+					<c:out value="${RESULTADO.getResultMsg()}"></c:out>
+				</h4>
+			</div>
+		<%-- </c:if> --%>
+
+		<a class="btn btn-secondary" href="/PracticaIntegradoraUnpaz2019/Alumnos">Volver a Alumnos</a>
+		<a class="btn btn-secondary" href="/PracticaIntegradoraUnpaz2019/Materias">Volver a Materias</a>
+	</div>
+
 	<div class="page-footer" style="background-color: #107aa3">
 		<div class="row">
 			<div class="col-sm-12">

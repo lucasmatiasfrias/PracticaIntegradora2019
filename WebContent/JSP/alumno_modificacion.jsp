@@ -16,7 +16,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--Fin CDN Boostrap-->
 
-<title>Editar Alumno de UNPAZ</title>
+<title>Modificación de Alumno de UNPAZ</title>
 <meta charset="UTF-8">
 <meta name="description" content="Alta de alumno de UNPAZ">
 <meta name="keywords" content="Alumnos,UNPAZ,Alta">
@@ -29,51 +29,43 @@
 	</div>
 
 	<div class="page-header" style="background-color: #f2f2f2">
-		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3" src="./res/unpaz.png"
-			alt="Logotipo Unpaz" style="width: 15%"></a>
+		<a href="/PracticaIntegradoraUnpaz2019/"><img class="mr-3"
+			src="./res/unpaz.png" alt="Logotipo Unpaz" style="width: 15%"></a>
 	</div>
 
 	<div class="container">
-		<h1>Editar de alumno</h1>
-
-		<c:if test="${STATUS == 0}">
-			<h3>
-				Error al obtener Usuario
-				<c:out value="${ALUMNO.getFile()}"></c:out>
-				!
-			</h3>
-		</c:if>
+		<h1>Modificación de alumno</h1>
 
 		<form action="./AlumnoEditar" method="post">
 			<div class="form-group">
 				<label for="">Legajo</label> <input class="form-control"
 					type="number" min="1" max="9999" readonly name="legajo"
-					value="<c:out value="${ALUMNO.getFile()}"></c:out>">
+					value='<c:out value="${ALUMNO.getFile()}"></c:out>'>
 			</div>
 			<div class="form-group">
 				<label for="">DNI</label> <input class="form-control" type="number"
 					min="1" max="99999999" required name="dni"
-					value="<c:out value="${ALUMNO.getDni()}" ></c:out>">
+					value='<c:out value="${ALUMNO.getDni()}" ></c:out>'>
 			</div>
 			<div class="form-group">
 				<label for="">Nombre</label> <input class="form-control" type="text"
 					name="nombre" required
-					value="<c:out value="${ALUMNO.getFirstname()}" ></c:out>">
+					value='<c:out value="${ALUMNO.getFirstname()}" ></c:out>'>
 			</div>
 			<div class="form-group">
 				<label for="">Apellido</label> <input class="form-control"
 					type="text" name="apellido" required
-					value="<c:out value="${ALUMNO.getLastname()}" ></c:out>">
+					value='<c:out value="${ALUMNO.getLastname()}" ></c:out>'>
 			</div>
 			<div class="form-group">
 				<label for="">Email</label> <input class="form-control" type="email"
 					name="email" required
-					value="<c:out value="${ALUMNO.getEmail()}" ></c:out>">
+					value='<c:out value="${ALUMNO.getEmail()}" ></c:out>'>
 			</div>
 			<div class="form-group">
 				<label for="">Género</label><select name="genero">
 					<c:forEach var="genero" items="${GENEROS}">
-						<option value="<c:out value="${genero}" ></c:out>"><c:out
+						<option value='<c:out value="${genero}" ></c:out>'><c:out
 								value="${genero}"></c:out></option>
 					</c:forEach>
 				</select>

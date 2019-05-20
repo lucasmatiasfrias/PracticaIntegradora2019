@@ -1,7 +1,6 @@
 package controller.user;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dto.UserDTO;
-
-import services.UsersService;
+import model.services.ServiceOperationResult;
+import model.services.UsersService;
 
 @WebServlet("/AlumnoBaja")
 public class DeleteUser extends HttpServlet {
@@ -24,31 +23,20 @@ public class DeleteUser extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		try {
-			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
-			if (!existing.isEmpty()) {
-				request.setAttribute("ALUMNO", existing.get(0));
-				getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
-			}
-		} catch (Exception e) {
-			request.setAttribute("EXCEPTION", e);
-			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
-			e.printStackTrace();
+		ServiceOperationResult<UserDTO> res = UsersService.getUserByFile(request.getParameter("legajo"));
+		if (!res.getQueryResluts().isEmpty()) {
+			request.setAttribute("ALUMNO", res.getQueryResluts().get(0));
+			getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
+		}else {
+			request.setAttribute("RESULTADO", res);
+			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			List<UserDTO> existing = UsersService.getUserByFile(request.getParameter("legajo"));
-			if (!existing.isEmpty()) {
-				if(UsersService.deleteUser(existing.get(0)))
-					response.sendRedirect("./Alumnos?status=1");
-			}
-		} catch (Exception e) {
-			request.setAttribute("EXCEPTION", e);
-			response.sendRedirect("./JSP/error.jsp?msg=" + e.getLocalizedMessage());
-			e.printStackTrace();
-		}
+		ServiceOperationResult<UserDTO> res = UsersService.deleteUser(request.getParameter("legajo"));
+		request.setAttribute("RESULTADO", res);
+		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
 	}
 }

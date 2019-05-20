@@ -24,7 +24,7 @@ public class SubjectDAL extends CRUD<Subject>{
 		deleteQuery = "DELETE FROM " + dbTableName + " WHERE id=?";
 	}
 
-	public static SubjectDAL getSubjectDAL(Connection conn) throws SQLException {
+	public static SubjectDAL getDAL(Connection conn) throws SQLException {
 		if(dal==null||dal.conn.isClosed())
 			dal=new SubjectDAL(conn);
 		return dal;

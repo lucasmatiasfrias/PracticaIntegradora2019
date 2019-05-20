@@ -16,7 +16,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <!--Fin CDN Boostrap-->
 
-<title>Eliminar Alumno de UNPAZ</title>
+<title>Baja de Materia UNPAZ</title>
 <meta charset="UTF-8">
 <meta name="description" content="Alta de alumno de UNPAZ">
 <meta name="keywords" content="Alumnos,UNPAZ,Alta">
@@ -34,38 +34,18 @@
 	</div>
 
 	<div class="container">
-		<h1>Eliminación de alumno</h1>
+		<h1>Baja de materia</h1>
 
-		<form action="./AlumnoBaja" method="post">
+		<form action="./MateriaBaja" method="post">
 			<div class="form-group">
-				<label for="">Legajo</label> <input class="form-control"
-					type="number" min="1" max="9999" readonly name="legajo"
-					value='<c:out value="${ALUMNO.getFile()}"></c:out>'>
+				<label for="">Código</label> <input class="form-control"
+					type="number" min="1" max="9999999" required name="code"
+					readonly value='<c:out value="${MATERIA.getId()}"></c:out>'>
 			</div>
 			<div class="form-group">
-				<label for="">DNI</label> <input class="form-control" type="number"
-					min="1" max="99999999" readonly name="dni"
-					value='<c:out value="${ALUMNO.getDni()}" ></c:out>'>
-			</div>
-			<div class="form-group">
-				<label for="">Nombre</label> <input class="form-control" type="text"
-					name="nombre" readonly
-					value='<c:out value="${ALUMNO.getFirstname()}" ></c:out>'>
-			</div>
-			<div class="form-group">
-				<label for="">Apellido</label> <input class="form-control"
-					type="text" name="apellido" readonly
-					value='<c:out value="${ALUMNO.getLastname()}" ></c:out>'>
-			</div>
-			<div class="form-group">
-				<label for="">Email</label> <input class="form-control" type="email"
-					name="email" readonly
-					value="<c:out value="${ALUMNO.getEmail()}" ></c:out>">
-			</div>
-			<div class="form-group">
-				<label for="">Género</label> <input class="form-control" type="text"
-					name="genero" readonly
-					value='<c:out value="${ALUMNO.getGender()}" ></c:out>'>
+				<label for="">Descripción</label> <input class="form-control"
+					type="text" required name="description"
+					readonly value='<c:out value="${MATERIA.getDescription()}"></c:out>'>
 			</div>
 			<button type="submit" class="btn btn-primary">Eliminar</button>
 		</form>

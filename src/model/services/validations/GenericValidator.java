@@ -1,4 +1,4 @@
-package services.validations;
+package model.services.validations;
 
 import static java.util.regex.Pattern.compile;
 
