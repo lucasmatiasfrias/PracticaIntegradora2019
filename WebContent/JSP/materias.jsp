@@ -39,13 +39,8 @@
 	<div class="container">
 		<h1>Listado de materias</h1>
 
-		<c:if test="${STATUS == 1}">
-			<div class="alert alert-success" role="alert">La operación se
-				ejecutó correctamente :)</div>
-
-		</c:if>
-
 		<a class="btn btn-primary" href="./MateriaAlta">Nueva Materia</a>
+				
 		<table class="table table-bordered table-striped table-dark">
 			<tr>
 				<th>Codigo de Materia</th>

@@ -23,8 +23,8 @@ public class EditSubject extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		ServiceOperationResult<SubjectDTO> res = SubjectService.getSubjectByCode(request.getParameter("id"));
-		if (!res.getQueryResluts().isEmpty()) {
-			request.setAttribute("MATERIA", res.getQueryResluts().get(0));
+		if (!res.getQueryResults().isEmpty()) {
+			request.setAttribute("MATERIA", res.getQueryResults().get(0));
 			getServletContext().getRequestDispatcher("/JSP/materia_modificacion.jsp").forward(request, response);
 		}else {
 			request.setAttribute("RESULTADO", res);

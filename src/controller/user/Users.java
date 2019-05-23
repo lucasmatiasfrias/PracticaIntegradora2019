@@ -26,7 +26,7 @@ public class Users extends HttpServlet {
 			throws ServletException, IOException {
 		ServiceOperationResult<UserDTO> res = UsersService.getUsers();
 		if (res.getResultType().equals(Success)) {
-			request.setAttribute("ALUMNOS", res.getQueryResluts());
+			request.setAttribute("ALUMNOS", res.getQueryResults());
 			getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 		} else {
 			request.setAttribute("ERROR", res.getResultMsg());

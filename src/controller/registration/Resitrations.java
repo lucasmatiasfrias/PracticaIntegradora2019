@@ -9,28 +9,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.RegistrationDTO;
 import dto.SubjectDTO;
+import model.services.RegistrationService;
 import model.services.ServiceOperationResult;
 import model.services.SubjectService;
 
-@WebServlet("/Resitrations")
+@WebServlet("/Inscripciones")
 public class Resitrations extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public Resitrations() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	public Resitrations() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ServiceOperationResult<SubjectDTO> res = SubjectService.getSubjects();
 		if (res.getResultType().equals(Success)) {
-			request.setAttribute("MATERIAS", res.getQueryResluts());
-			getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
+			String selectedSubject=request.getParameter("materiaSeleccionada");
+			ServiceOperationResult<RegistrationDTO> res2;
+			if ( selectedSubject!= null) {
+				request.setAttribute("materiaSeleccionada", selectedSubject);
+				res2=RegistrationService.getRegistrationsBySubject(selectedSubject);
+			}else {
+				res2=RegistrationService.getRegistrations();
+			}
+			request.setAttribute("MATERIAS", res.getQueryResults());
+			request.setAttribute("INSCRIPCIONES", res2.getQueryResults());
+			getServletContext().getRequestDispatcher("/JSP/inscripciones.jsp").forward(request, response);
 		} else {
 			request.setAttribute("ERROR", res.getResultMsg());
 			getServletContext().getRequestDispatcher("/JSP/error.jsp").forward(request, response);
 		}
 	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setAttribute("materiaSeleccionada", request.getParameter("materia"));
+		doGet(request, response);
+	}
+
 }

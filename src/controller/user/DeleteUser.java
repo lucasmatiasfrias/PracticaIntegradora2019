@@ -24,8 +24,8 @@ public class DeleteUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		ServiceOperationResult<UserDTO> res = UsersService.getUserByFile(request.getParameter("legajo"));
-		if (!res.getQueryResluts().isEmpty()) {
-			request.setAttribute("ALUMNO", res.getQueryResluts().get(0));
+		if (!res.getQueryResults().isEmpty()) {
+			request.setAttribute("ALUMNO", res.getQueryResults().get(0));
 			getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
 		}else {
 			request.setAttribute("RESULTADO", res);

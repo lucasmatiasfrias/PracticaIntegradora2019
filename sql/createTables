@@ -1,0 +1,68 @@
+-- Table: public.student
+
+-- DROP TABLE public.student;
+
+CREATE TABLE public.student
+(
+    file bigint NOT NULL,
+    dni bigint NOT NULL,
+    firstname character varying COLLATE pg_catalog."default" NOT NULL,
+    lastname character varying COLLATE pg_catalog."default" NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    gender character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT students_pkey PRIMARY KEY (file)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.student
+    OWNER to lucasfriasmoodle;
+    
+    
+-- Table: public.subject
+
+-- DROP TABLE public.subject;
+
+CREATE TABLE public.subject
+(
+    id bigint NOT NULL,
+    description character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT subject_pkey PRIMARY KEY (id)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.subject
+    OWNER to lucasfriasmoodle;
+    
+    
+-- Table: public.registration
+
+-- DROP TABLE public.registration;
+
+CREATE TABLE public.registration
+(
+    id bigint NOT NULL,
+    subjectid bigint NOT NULL,
+    studentfile bigint NOT NULL,
+    CONSTRAINT registration_pkey PRIMARY KEY (id),
+    CONSTRAINT "student_FK" FOREIGN KEY (studentfile)
+        REFERENCES public.student (file) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "subject_FK" FOREIGN KEY (subjectid)
+        REFERENCES public.subject (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.registration
+    OWNER to lucasfriasmoodle;

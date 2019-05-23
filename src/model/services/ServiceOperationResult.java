@@ -35,7 +35,7 @@ public class ServiceOperationResult <T>{
 		this.resultMsg = resultMsg;
 	}
 
-	public List<T> getQueryResluts() {
+	public List<T> getQueryResults() {
 		return queryResluts;
 	}
 

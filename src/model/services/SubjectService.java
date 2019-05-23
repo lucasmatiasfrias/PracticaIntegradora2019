@@ -44,7 +44,7 @@ public class SubjectService {
 				List<Subject> subjects = dal.getById(Integer.valueOf(code));
 				if (!subjects.isEmpty()) {
 					for (Subject subject : subjects) {
-						result.getQueryResluts().add(subject.toDTO());
+						result.getQueryResults().add(subject.toDTO());
 					}
 					result.setResultType(Success);
 					result.setResultMsg("Se leyeron los usuarios correctamente");

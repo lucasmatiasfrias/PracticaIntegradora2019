@@ -39,14 +39,6 @@
 	<div class="container">
 		<h1>Listado de alumnos</h1>
 
-		<c:if test="${status == 1}">
-			<div class="alert alert-info" role="alert">
-				<h1>
-					<c:out value="${RESULTADO.getResultMsg()}"></c:out>
-				</h1>
-			</div>
-		</c:if>
-
 		<a class="btn btn-primary" href="./AlumnoAlta">Nuevo alumno</a>
 		<table class="table table-bordered table-striped table-dark">
 			<tr>

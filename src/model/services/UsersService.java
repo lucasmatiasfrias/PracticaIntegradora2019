@@ -44,7 +44,7 @@ public class UsersService {
 				List<User> users = dal.getById(Integer.valueOf(file));
 				if(!users.isEmpty()) {
 					for (User user : users) {
-						result.getQueryResluts().add(user.toDTO());
+						result.getQueryResults().add(user.toDTO());
 					}
 					result.setResultType(Success);
 					result.setResultMsg("Se leyeron los usuarios correctamente");

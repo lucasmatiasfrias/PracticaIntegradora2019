@@ -23,8 +23,8 @@ public class EditUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		ServiceOperationResult<UserDTO> res = UsersService.getUserByFile(request.getParameter("legajo"));
-		if (!res.getQueryResluts().isEmpty()) {
-			request.setAttribute("ALUMNO", res.getQueryResluts().get(0));
+		if (!res.getQueryResults().isEmpty()) {
+			request.setAttribute("ALUMNO", res.getQueryResults().get(0));
 			request.setAttribute("GENEROS", UserDTO.avaiableGenders);
 			getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
 		}else {

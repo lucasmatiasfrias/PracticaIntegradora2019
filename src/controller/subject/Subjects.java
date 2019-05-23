@@ -26,7 +26,7 @@ public class Subjects extends HttpServlet {
 			throws ServletException, IOException {
 		ServiceOperationResult<SubjectDTO> res = SubjectService.getSubjects();
 		if (res.getResultType().equals(Success)) {
-			request.setAttribute("MATERIAS", res.getQueryResluts());
+			request.setAttribute("MATERIAS", res.getQueryResults());
 			getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
 		} else {
 			request.setAttribute("ERROR", res.getResultMsg());
