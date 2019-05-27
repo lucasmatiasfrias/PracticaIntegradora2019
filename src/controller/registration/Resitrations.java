@@ -30,7 +30,7 @@ public class Resitrations extends HttpServlet {
 		if (res.getResultType().equals(Success)) {
 			String selectedSubject=request.getParameter("materiaSeleccionada");
 			ServiceOperationResult<RegistrationDTO> res2;
-			if ( selectedSubject!= null) {
+			if ( selectedSubject!= null && !selectedSubject.equals("0")) {
 				request.setAttribute("materiaSeleccionada", selectedSubject);
 				res2=RegistrationService.getRegistrationsBySubject(selectedSubject);
 			}else {
@@ -43,13 +43,6 @@ public class Resitrations extends HttpServlet {
 			request.setAttribute("ERROR", res.getResultMsg());
 			getServletContext().getRequestDispatcher("/JSP/error.jsp").forward(request, response);
 		}
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setAttribute("materiaSeleccionada", request.getParameter("materia"));
-		doGet(request, response);
 	}
 
 }
