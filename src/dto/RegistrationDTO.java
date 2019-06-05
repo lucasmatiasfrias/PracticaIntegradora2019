@@ -2,39 +2,19 @@ package dto;
 
 public class RegistrationDTO {
 
-	private String subject;
-	private String studentFile;
-	private String studentDNI;
-	private String studentFirstname;
-	private String studentLastname;
-	
-	public RegistrationDTO(String subject, String studentFile, String studentDNI, String studentFirstname,
-			String studentLastname) {
-		super();
-		this.subject = subject;
-		this.studentFile = studentFile;
-		this.studentDNI = studentDNI;
-		this.studentFirstname = studentFirstname;
-		this.studentLastname = studentLastname;
+	private SubjectDTO subject;
+	private UserDTO user;
+
+	public RegistrationDTO(SubjectDTO subjcet, UserDTO user) {
+		this.subject = subjcet;
+		this.user = user;
 	}
 
-	public String getSubject() {
+	public SubjectDTO getSubjcet() {
 		return subject;
 	}
 
-	public String getStudentFile() {
-		return studentFile;
-	}
-
-	public String getStudentDNI() {
-		return studentDNI;
-	}
-
-	public String getStudentFirstname() {
-		return studentFirstname;
-	}
-
-	public String getStudentLastname() {
-		return studentLastname;
+	public UserDTO getUser() {
+		return user;
 	}
 }

@@ -21,7 +21,6 @@ public class Registration {
 	}
 
 	public RegistrationDTO toDTO() {
-		return new RegistrationDTO(this.subject.getDescription(), this.user.getFile().toString(),
-				this.user.getDni().toString(), this.user.getFirstname(), this.user.getLastname());
+		return new RegistrationDTO(this.subject.toDTO(), this.user.toDTO());
 	}
 }
