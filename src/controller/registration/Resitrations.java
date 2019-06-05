@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
 
 import dto.RegistrationDTO;
 import dto.SubjectDTO;
@@ -29,20 +30,29 @@ public class Resitrations extends HttpServlet {
 		ServiceOperationResult<SubjectDTO> res = SubjectService.getSubjects();
 		if (res.getResultType().equals(Success)) {
 			String selectedSubject=request.getParameter("materiaSeleccionada");
-			ServiceOperationResult<RegistrationDTO> res2;
 			if ( selectedSubject!= null && !selectedSubject.equals("0")) {
 				request.setAttribute("materiaSeleccionada", selectedSubject);
-				res2=RegistrationService.getRegistrationsBySubject(selectedSubject);
-			}else {
-				res2=RegistrationService.getRegistrations();
 			}
 			request.setAttribute("MATERIAS", res.getQueryResults());
-			request.setAttribute("INSCRIPCIONES", res2.getQueryResults());
 			getServletContext().getRequestDispatcher("/JSP/inscripciones.jsp").forward(request, response);
 		} else {
 			request.setAttribute("ERROR", res.getResultMsg());
 			getServletContext().getRequestDispatcher("/JSP/error.jsp").forward(request, response);
 		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ServiceOperationResult<RegistrationDTO> res;
+		String selectedSubject=request.getParameter("materiaSeleccionada");
+		if ( selectedSubject!= null && !selectedSubject.equals("0")) {
+			request.setAttribute("materiaSeleccionada", selectedSubject);
+			res=RegistrationService.getRegistrationsBySubject(selectedSubject);
+		}else {
+			res=RegistrationService.getRegistrations();
+		}
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(new Gson().toJson(res.getQueryResults()));
 	}
 
 }
