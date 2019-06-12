@@ -32,8 +32,8 @@ public class AddUser extends HttpServlet {
 				request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("email"),
 				request.getParameter("genero"));
 		ServiceOperationResult<UserDTO> res = UsersService.addUser(user);
-		request.setAttribute("RESULTADO", res);
-		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		request.setAttribute("RESULTADO_ABM", res);
+		getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 	}
 
 }

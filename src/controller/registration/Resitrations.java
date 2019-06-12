@@ -46,7 +46,6 @@ public class Resitrations extends HttpServlet {
 		ServiceOperationResult<RegistrationDTO> res;
 		String selectedSubject=request.getParameter("materiaSeleccionada");
 		if ( selectedSubject!= null && !selectedSubject.equals("0")) {
-			request.setAttribute("materiaSeleccionada", selectedSubject);
 			res=RegistrationService.getRegistrationsBySubject(selectedSubject);
 		}else {
 			res=RegistrationService.getRegistrations();

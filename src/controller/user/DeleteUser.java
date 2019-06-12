@@ -28,15 +28,16 @@ public class DeleteUser extends HttpServlet {
 			request.setAttribute("ALUMNO", res.getQueryResults().get(0));
 			getServletContext().getRequestDispatcher("/JSP/alumno_baja.jsp").forward(request, response);
 		}else {
-			request.setAttribute("RESULTADO", res);
-			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+			request.setAttribute("RESULTADO_ABM", res);
+			getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ServiceOperationResult<UserDTO> res = UsersService.deleteUser(request.getParameter("legajo"));
-		request.setAttribute("RESULTADO", res);
-		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		request.setAttribute("RESULTADO_ABM", res);
+		getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 	}
+	
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import dto.UserDTO;
 import model.services.ServiceOperationResult;
 import model.services.UsersService;
@@ -34,4 +35,10 @@ public class Users extends HttpServlet {
 		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ServiceOperationResult<UserDTO> res= UsersService.getUsers();
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(new Gson().toJson(res.getQueryResults()));
+	}
 }

@@ -28,8 +28,8 @@ public class EditUser extends HttpServlet {
 			request.setAttribute("GENEROS", UserDTO.avaiableGenders);
 			getServletContext().getRequestDispatcher("/JSP/alumno_modificacion.jsp").forward(request, response);
 		}else {
-			request.setAttribute("RESULTADO", res);
-			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+			request.setAttribute("RESULTADO_ABM", res);
+			getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 		}
 	}
 
@@ -39,7 +39,7 @@ public class EditUser extends HttpServlet {
 				request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("email"),
 				request.getParameter("genero"));
 		ServiceOperationResult<UserDTO> res = UsersService.updateUser(user);
-		request.setAttribute("RESULTADO", res);
-		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		request.setAttribute("RESULTADO_ABM", res);
+		getServletContext().getRequestDispatcher("/JSP/alumnos.jsp").forward(request, response);
 	}
 }
