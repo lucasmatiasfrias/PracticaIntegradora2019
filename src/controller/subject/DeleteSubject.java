@@ -27,16 +27,16 @@ public class DeleteSubject extends HttpServlet {
 			request.setAttribute("MATERIA", res.getQueryResults().get(0));
 			getServletContext().getRequestDispatcher("/JSP/materia_baja.jsp").forward(request, response);
 		}else {
-			request.setAttribute("RESULTADO", res);
-			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+			request.setAttribute("RESULTADO_ABM", res);
+			getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ServiceOperationResult<SubjectDTO> res = SubjectService.deleteSubject(request.getParameter("code"));
-		request.setAttribute("RESULTADO", res);
-		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		request.setAttribute("RESULTADO_ABM", res);
+		getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
 	}
 
 }

@@ -37,7 +37,7 @@ public class SubjectService {
 
 	public static ServiceOperationResult<SubjectDTO> getSubjectByCode(String code) {
 		ServiceOperationResult<SubjectDTO> result = new ServiceOperationResult<SubjectDTO>(Error, "");
-		if (isNumeric(code)) {
+		if (code != null && isNumeric(code)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 				CRUD<Subject> dal = SubjectDAL.getDAL(conn);
@@ -84,7 +84,7 @@ public class SubjectService {
 
 	public static ServiceOperationResult<SubjectDTO> deleteSubject(String code) {
 		ServiceOperationResult<SubjectDTO> result = new ServiceOperationResult<SubjectDTO>(Error, "");
-		if (isNumeric(code)) {
+		if (code != null && isNumeric(code)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 				CRUD<Subject> dal = SubjectDAL.getDAL(conn);

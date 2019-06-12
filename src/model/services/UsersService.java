@@ -37,7 +37,7 @@ public class UsersService {
 
 	public static ServiceOperationResult<UserDTO> getUserByFile(String file) {
 		ServiceOperationResult<UserDTO> result = new ServiceOperationResult<UserDTO>(Error, "");
-		if (isFile(file)) {
+		if (file !=null && isFile(file)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 				CRUD<User> dal = UserDAL.getDAL(conn);
@@ -84,7 +84,7 @@ public class UsersService {
 
 	public static ServiceOperationResult<UserDTO> deleteUser(String file) {
 		ServiceOperationResult<UserDTO> result = new ServiceOperationResult<UserDTO>(Error, "");
-		if (isFile(file)) {
+		if (file !=null && isFile(file)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
 				CRUD<User> dal = UserDAL.getDAL(conn);

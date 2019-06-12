@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import dto.SubjectDTO;
 import model.services.ServiceOperationResult;
 import model.services.SubjectService;
@@ -32,6 +33,13 @@ public class Subjects extends HttpServlet {
 			request.setAttribute("ERROR", res.getResultMsg());
 			getServletContext().getRequestDispatcher("/JSP/error.jsp").forward(request, response);
 		}
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		ServiceOperationResult<SubjectDTO> res= SubjectService.getSubjects();
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(new Gson().toJson(res.getQueryResults()));
 	}
 
 }

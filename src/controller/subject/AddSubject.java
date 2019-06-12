@@ -29,8 +29,8 @@ public class AddSubject extends HttpServlet {
 			throws ServletException, IOException {
 		SubjectDTO subject = new SubjectDTO(request.getParameter("code"), request.getParameter("description"));
 		ServiceOperationResult<SubjectDTO> res = SubjectService.addSubject(subject);
-		request.setAttribute("RESULTADO", res);
-		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		request.setAttribute("RESULTADO_ABM", res);
+		getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
 	}
 
 }

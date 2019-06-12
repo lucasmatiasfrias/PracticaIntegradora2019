@@ -12,32 +12,13 @@
 	<jsp:include page="static/header.jsp" />
 	<jsp:include page="static/navigation.jsp" />
 	<div class="container">
+		<jsp:include page="static/resultadoABM.jsp" />
 		<h1>Listado de materias</h1>
 		<a class="btn btn-primary" href="./MateriaAlta">Nueva Materia</a>
-		<table class="table table-bordered table-striped table-dark">
-			<tr>
-				<th>Codigo de Materia</th>
-				<th>Descripcion</th>
-				<th>Acciones</th>
-			</tr>
-			<c:forEach var="materia" items="${MATERIAS}">
-				<tr>
-					<td><c:out value="${materia.getId()}" /></td>
-					<td><c:out value="${materia.getDescription()}" /></td>
-					<td>
-						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-							<a class="btn btn-primary"
-								href="./MateriaEditar?id=<c:out value="${materia.getId()}"/>"
-								role="button">Editar</a> <a class="btn btn-primary"
-								href="./MateriaBaja?id=<c:out value="${materia.getId()}"/>"
-								role="button">Eliminar</a>
-						</div>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
+		<div id="subjectsTable"></div>
 	</div>
 	<jsp:include page="static/footer.jsp" />
 	<jsp:include page="static/boostrapCDN_JS.jsp" />
+	<script type="text/javascript" src="JS/loadSubjects.js" charset="UTF-8"></script>
 </body>
 </html>

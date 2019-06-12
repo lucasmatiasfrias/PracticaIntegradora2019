@@ -27,8 +27,8 @@ public class EditSubject extends HttpServlet {
 			request.setAttribute("MATERIA", res.getQueryResults().get(0));
 			getServletContext().getRequestDispatcher("/JSP/materia_modificacion.jsp").forward(request, response);
 		}else {
-			request.setAttribute("RESULTADO", res);
-			getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+			request.setAttribute("RESULTADO_ABM", res);
+			getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
 		}
 	}
 
@@ -36,8 +36,8 @@ public class EditSubject extends HttpServlet {
 			throws ServletException, IOException {
 		SubjectDTO subject = new SubjectDTO(request.getParameter("code"), request.getParameter("description"));
 		ServiceOperationResult<SubjectDTO> res = SubjectService.updateSubject(subject);
-		request.setAttribute("RESULTADO", res);
-		getServletContext().getRequestDispatcher("/JSP/resultadoABM.jsp").forward(request, response);
+		request.setAttribute("RESULTADO_ABM", res);
+		getServletContext().getRequestDispatcher("/JSP/materias.jsp").forward(request, response);
 	}
 
 }
