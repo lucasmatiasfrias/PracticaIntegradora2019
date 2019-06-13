@@ -21,7 +21,7 @@ public class RegistrationDAL extends CRUD<Registration> {
 		dbTableName = "registration";
 		selectAllQuery = "SELECT id, subjectid, studentfile FROM " + dbTableName;
 		selectByIdQuery = selectAllQuery + " WHERE subjectid=?";
-		insertQuery = "INSERT INTO " + dbTableName + " (id, subjectid, studentfile) VALUES (?,?,?)";
+		insertQuery = "INSERT INTO " + dbTableName + " (subjectid, studentfile) VALUES (?,?)";
 		updateQuery = "UPDATE " + dbTableName + " SET subjectid=?, studentfile=? WHERE id=?";
 		deleteQuery = "DELETE FROM " + dbTableName + " WHERE id=?";
 	}
@@ -70,8 +70,12 @@ public class RegistrationDAL extends CRUD<Registration> {
 
 	@Override
 	public int create(Registration t) throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement ps = this.conn.prepareStatement(this.insertQuery);
+		ps.setInt(1, t.getSubjcet().getId());
+		ps.setInt(2, t.getUser().getFile());
+		int r = ps.executeUpdate();
+		ps.close();
+		return r;
 	}
 
 	@Override

@@ -18,9 +18,9 @@ INSERT INTO public.subject(
 	id, description)
 	VALUES (9, 'Programación');
 
-insert into registration (id, subjectid, studentfile) values(1,4,1);
-insert into registration (id, subjectid, studentfile) values(2,5,2);
-insert into registration (id, subjectid, studentfile) values(3,5,3);
-insert into registration (id, subjectid, studentfile) values(4,9,1);
-insert into registration (id, subjectid, studentfile) values(5,9,2);
-insert into registration (id, subjectid, studentfile) values(6,9,3);
+insert into registration (subjectid, studentfile) values(4,1);
+insert into registration (subjectid, studentfile) values(5,2);
+insert into registration (subjectid, studentfile) values(5,3);
+insert into registration (subjectid, studentfile) values(9,1);
+insert into registration (subjectid, studentfile) values(9,2);
+insert into registration (subjectid, studentfile) values(9,3);

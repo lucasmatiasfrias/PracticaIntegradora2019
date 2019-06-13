@@ -2,6 +2,8 @@ package model.validations;
 
 import static java.util.regex.Pattern.compile;
 
+import java.util.List;
+
 public class GenericValidator {
 
 	public static boolean isNumeric(String s) {
@@ -24,4 +26,12 @@ public class GenericValidator {
 		return compile("[A-Za-z0-9]*").matcher(s).matches();
 	}
 
+	public static boolean areNumeric(List<String> s) {
+		boolean b=true;
+		for (String string : s) {
+			if(!isNumeric(string))
+				b=false;
+		}
+		return b;
+	}
 }

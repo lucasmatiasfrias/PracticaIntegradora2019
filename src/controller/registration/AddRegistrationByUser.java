@@ -16,8 +16,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import dto.RegistrationDTO;
 import dto.SubjectDTO;
 import dto.UserDTO;
+import model.services.RegistrationService;
 import model.services.ServiceOperationResult;
 import model.services.SubjectService;
 import model.services.UsersService;
@@ -50,30 +52,24 @@ public class AddRegistrationByUser extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println(request.getParameter("json"));
-		String json = "{\"studentFile\":2,\"subjectsIds\":[\"4\",\"9\",\"5\"]}";
-		JsonParser parser = new JsonParser();
-		JsonObject obj = (JsonObject) parser.parse(json);
-		System.out.println(obj.toString());
-	}
-
-	public static void main(String[] args) {
-		String json = "{\"studentFile\":2,\"subjectsIds\":[\"4\",\"9\",\"5\"]}";
-
-		JsonParser parser = new JsonParser();
-		JsonObject obj = (JsonObject) parser.parse(json);
-
-		String studentFile=obj.get("studentFile").toString();
-		List<String> subjectsIds= new ArrayList<String>();
-		for(JsonElement e: obj.get("subjectsIds").getAsJsonArray()) {
-			subjectsIds.add(e.getAsString());
+		String json = request.getParameter("json");
+		if(json!=null&&!json.isEmpty()) {
+			try {
+				JsonParser parser = new JsonParser();
+				JsonObject obj = (JsonObject) parser.parse(json);
+				String studentFile=obj.get("studentFile").toString();
+				List<String> subjectsIds= new ArrayList<String>();
+				for(JsonElement e: obj.get("subjectsIds").getAsJsonArray()) {
+					subjectsIds.add(e.getAsString());
+				}
+				ServiceOperationResult<RegistrationDTO> res=RegistrationService.addRegistration(studentFile, subjectsIds);
+				if(!res.getResultType().equals(Success)) {
+					response.sendRedirect("/PracticaIntegradoraUnpaz2019/Inscripciones");
+				}
+			}catch (Exception e) {
+				
+			}
 		}
-		
-		System.out.println("Legajo de Alumno: "+studentFile);
-		for (String string : subjectsIds) {
-			System.out.println(string);
-		}
-		
 	}
 
 }

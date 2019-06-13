@@ -46,7 +46,7 @@ ALTER TABLE public.subject
 
 CREATE TABLE public.registration
 (
-    id bigint NOT NULL,
+    id SERIAL NOT NULL,
     subjectid bigint NOT NULL,
     studentfile bigint NOT NULL,
     CONSTRAINT registration_pkey PRIMARY KEY (id),
