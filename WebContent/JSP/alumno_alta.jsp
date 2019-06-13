@@ -13,11 +13,6 @@
 	<jsp:include page="static/navigation.jsp" />
 	<div class="container">
 		<h1>Alta de alumno</h1>
-
-		<c:if test="${STATUS == 0}">
-			<h3>Error al guardar!!</h3>
-		</c:if>
-
 		<form action="./AlumnoAlta" method="post">
 			<div class="form-group">
 				<label for="">Legajo</label> <input class="form-control"

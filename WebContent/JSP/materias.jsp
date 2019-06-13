@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="description" content="Listado de alumnos de UNPAZ">
-<meta name="keywords" content="Alumnos,UNPAZ,Listado">
+<meta name="description" content="Listado de materias de UNPAZ">
+<meta name="keywords" content="Materias,UNPAZ,Listado">
 <jsp:include page="static/metaData.jsp" />
 <jsp:include page="static/boostrapCDN_CSS.jsp" />
 <title>Listado de materias UNPAZ</title>

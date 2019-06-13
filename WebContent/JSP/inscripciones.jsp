@@ -10,7 +10,7 @@
 	<jsp:include page="static/header.jsp" />
 	<jsp:include page="static/navigation.jsp" />
 	<div class="container">
-		<h1>Inscripciones a materias</h1>
+		<h1>Inscripciones</h1>
 		<label for="">Seleccione Materia</label><select
 			name="materiaSeleccionada" class="browser-default custom-select"
 			onchange="loadRegistrations(this.options[this.selectedIndex].value)"
@@ -25,11 +25,6 @@
 			</c:forEach>
 		</select>
 		<div id="subjectsTable"></div>
-		<c:if test="${materiaSeleccionada > 0 }">
-			<a class="btn btn-primary"
-				href="./InscripcionAlta?materia=<c:out value="${materiaSeleccionada}"/>">Inscribir
-				alumno</a>
-		</c:if>
 	</div>
 	<br>
 	<jsp:include page="static/footer.jsp" />

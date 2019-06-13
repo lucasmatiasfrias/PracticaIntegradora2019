@@ -37,6 +37,10 @@ public class UserDTO{
 		return lastname;
 	}
 	
+	public String getFullname() {
+		return firstname+" "+lastname;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -56,6 +60,10 @@ public class UserDTO{
 	public String toString() {
 		return "UserDTO [file=" + file + ", dni=" + dni + ", firstname=" + firstname + ", lastname=" + lastname
 				+ ", email=" + email + ", gender=" + gender + ", approvalPercentage=" + approvalPercentage + "]";
+	}
+	
+	public String toString2() {
+		return "legajo: " + file + ", DNI:" + dni + ", " +"Nombre y Apellido: "+ firstname + " " + lastname;
 	}
 
 }

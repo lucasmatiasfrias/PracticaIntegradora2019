@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta name="description" content="Alta de alumno de UNPAZ">
-<meta name="keywords" content="Alumnos,UNPAZ,Alta">
+<meta name="description" content="Modificación de alumno de UNPAZ">
+<meta name="keywords" content="Alumnos,UNPAZ,Modificación">
 <jsp:include page="static/metaData.jsp" />
 <jsp:include page="static/boostrapCDN_CSS.jsp" />
 <title>Modificación de Alumno de UNPAZ</title>

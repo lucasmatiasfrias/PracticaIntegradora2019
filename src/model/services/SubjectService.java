@@ -28,7 +28,7 @@ public class SubjectService {
 				subjectDTO.add(subject.toDTO());
 			}
 			conn.close();
-			return new ServiceOperationResult<SubjectDTO>(Success, "Se leyeron los usuarios correctamente", subjectDTO);
+			return new ServiceOperationResult<SubjectDTO>(Success, "Se leyeron las materias correctamente", subjectDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ServiceOperationResult<SubjectDTO>(Error, e.getLocalizedMessage());
@@ -47,7 +47,7 @@ public class SubjectService {
 						result.getQueryResults().add(subject.toDTO());
 					}
 					result.setResultType(Success);
-					result.setResultMsg("Se leyeron los usuarios correctamente");
+					result.setResultMsg("Se leyeron las materias correctamente");
 				}else
 					result.setResultMsg("No existe la materia con código "+ code);
 				conn.close();

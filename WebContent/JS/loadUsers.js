@@ -31,7 +31,7 @@ function createTable(json, tableDiv) {
 				+ "' role='button'>Editar</a> <a class='btn btn-primary' href='./AlumnoBaja?legajo="
 				+ json[i].file
 				+ "' role='button'>Eliminar</a>"
-				+ "<a class='btn btn-primary'	href='./InscripcionAlta?legajoAlumno="
+				+ "<a class='btn btn-primary'	href='./InscripcionPorAlumnoAlta?legajoAlumno="
 				+ json[i].file
 				+ "' role='button'>Inscribir a Materias</a></div></td>";
 		table += "</tr>";
