@@ -2,14 +2,14 @@ package model.validations;
 
 import static model.validations.GenericValidator.isAlphabeticalString;
 import static model.validations.GenericValidator.isDocument;
-import static model.validations.GenericValidator.isNumeric;
+import static model.validations.GenericValidator.isNumerical;
 
 import dto.UserDTO;
 
 public class UserValidator {
 
 	public static boolean isFile(String s) {
-		return isNumeric(s) && s.length() < 7;
+		return isNumerical(s) && s.length() < 7;
 	}
 
 	public static boolean isUserValid(UserDTO user) {

@@ -19,7 +19,7 @@ function loadRegistrations(idMateria) {
 }
 
 function createTable(json, tableDiv) {
-	var table = '<table class="table table-bordered table-striped table-dark"><tr><th>Materia</th><th>Lejajo del Alumno</th><th>DNI del Alumno</th><th>Nombre del Alumno</th><th>Apellido del Alumno</th><th>Email del Alumno</th></tr>';
+	var table = '<table class="table table-bordered table-striped table-dark"><tr><th>Materia</th><th>Lejajo del Alumno</th><th>DNI del Alumno</th><th>Nombre del Alumno</th><th>Apellido del Alumno</th><th>Email del Alumno</th><th>Acciones</th></tr>';
 	for (var i = 0; i < json.length; i++) {
 		table += "<tr>";
 		table += "<td>" + json[i].subject.description + "</td>";
@@ -28,6 +28,8 @@ function createTable(json, tableDiv) {
 		table += "<td>" + json[i].user.firstname + "</td>";
 		table += "<td>" + json[i].user.lastname + "</td>";
 		table += "<td>" + json[i].user.email + "</td>";
+		table += "<td><a class='btn btn-primary' href='./InscripcionBaja?id="
+				+ json[i].id + "' role='button'>Eliminar</a></div></td>";
 		table += "</tr>";
 	}
 	tableDiv.innerHTML = table + "</table>";

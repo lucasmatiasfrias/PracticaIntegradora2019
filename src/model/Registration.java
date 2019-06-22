@@ -3,13 +3,18 @@ package model;
 import dto.RegistrationDTO;
 
 public class Registration {
+	private Integer id;
 	private Subject subject;
 	private User user;
 
-	public Registration(Subject subjcet, User user) {
-		super();
-		this.subject = subjcet;
+	public Registration(Integer id, Subject subject, User user) {
+		this.id = id;
+		this.subject = subject;
 		this.user = user;
+	}
+	
+	public Registration(Subject subject, User user) {
+		this(0,subject, user);
 	}
 
 	public Subject getSubjcet() {
@@ -20,7 +25,12 @@ public class Registration {
 		return user;
 	}
 
-	public RegistrationDTO toDTO() {
-		return new RegistrationDTO(this.subject.toDTO(), this.user.toDTO());
+	public int getId() {
+		return id;
 	}
+	
+	public RegistrationDTO toDTO() {
+		return new RegistrationDTO(this.id.toString(), this.subject.toDTO(), this.user.toDTO());
+	}
+
 }

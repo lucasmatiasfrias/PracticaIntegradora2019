@@ -13,15 +13,15 @@ import dto.UserDTO;
 import model.User;
 import persistence.connection.ConnectionPropertiesLoader;
 import persistence.connection.DBConnectionManager;
-import persistence.dal.CRUD;
-import persistence.dal.UserDAL;
+import persistence.dal.impl.UserDAL;
+import persistence.dal.interfaces.I_UserDAL;
 
 public class UsersService {
 
 	public static ServiceOperationResult<UserDTO> getUsers() {
 		try {
 			Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-			CRUD<User> dal = UserDAL.getDAL(conn);
+			I_UserDAL dal = UserDAL.getDAL(conn);
 			List<User> users = dal.getAll();
 			List<UserDTO> usersDTO = new ArrayList<UserDTO>();
 			for (User user : users) {
@@ -40,7 +40,7 @@ public class UsersService {
 		if (file !=null && isFile(file)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<User> dal = UserDAL.getDAL(conn);
+				I_UserDAL dal = UserDAL.getDAL(conn);
 				List<User> users = dal.getById(Integer.valueOf(file));
 				if(!users.isEmpty()) {
 					for (User user : users) {
@@ -66,7 +66,7 @@ public class UsersService {
 			User u = new User(user);
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<User> dal = UserDAL.getDAL(conn);
+				I_UserDAL dal = UserDAL.getDAL(conn);
 				if (dal.getById(u.getFile()).isEmpty() && dal.create(u) > 0) {
 					result.setResultType(Success);
 					result.setResultMsg("El usuario se agregó correctamente");
@@ -87,7 +87,7 @@ public class UsersService {
 		if (file !=null && isFile(file)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<User> dal = UserDAL.getDAL(conn);
+				I_UserDAL dal = UserDAL.getDAL(conn);
 				List<User> existing=dal.getById(Integer.valueOf(file));
 				if (!existing.isEmpty() && dal.delete(existing.get(0)) > 0) {
 					result.setResultType(Success);
@@ -110,7 +110,7 @@ public class UsersService {
 			User u = new User(user);
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<User> dal = UserDAL.getDAL(conn);
+				I_UserDAL dal = UserDAL.getDAL(conn);
 				if (!dal.getById(u.getFile()).isEmpty() && dal.update(u) > 0) {
 					result.setResultType(Success);
 					result.setResultMsg("El usuario se actualizó correctamente");

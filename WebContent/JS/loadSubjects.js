@@ -25,8 +25,7 @@ function createTable(json, tableDiv) {
 		table += "<td><div class='btn-group btn-group-toggle' data-toggle='buttons'><a class='btn btn-primary' href='./MateriaEditar?id="
 				+ json[i].id
 				+ "' role='button'>Editar</a> <a class='btn btn-primary' href='./MateriaBaja?id="
-				+ json[i].id + "' role='button'>Eliminar</a><a class='btn btn-primary' href='./InscripcionPorMateriaAlta?idMateria="
-				+ json[i].id + "' role='button'>Inscribir Alumnos</a></div></td>";
+				+ json[i].id + "' role='button'>Eliminar</a></div></td>";
 		table += "</tr>";
 	}
 	tableDiv.innerHTML = table + "</table>";

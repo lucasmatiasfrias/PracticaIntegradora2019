@@ -2,7 +2,7 @@ package model.services;
 
 import static model.services.ServiceOpertationResultType.Error;
 import static model.services.ServiceOpertationResultType.Success;
-import static model.validations.GenericValidator.isNumeric;
+import static model.validations.GenericValidator.isNumerical;
 import static model.validations.SubjectValidator.isSubjectValid;
 
 import java.sql.Connection;
@@ -13,15 +13,15 @@ import dto.SubjectDTO;
 import model.Subject;
 import persistence.connection.ConnectionPropertiesLoader;
 import persistence.connection.DBConnectionManager;
-import persistence.dal.CRUD;
-import persistence.dal.SubjectDAL;
+import persistence.dal.impl.SubjectDAL;
+import persistence.dal.interfaces.I_SubjectDAL;
 
 public class SubjectService {
 
 	public static ServiceOperationResult<SubjectDTO> getSubjects() {
 		try {
 			Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-			CRUD<Subject> dal = SubjectDAL.getDAL(conn);
+			I_SubjectDAL dal = SubjectDAL.getDAL(conn);
 			List<Subject> subjects = dal.getAll();
 			List<SubjectDTO> subjectDTO = new ArrayList<SubjectDTO>();
 			for (Subject subject : subjects) {
@@ -37,10 +37,10 @@ public class SubjectService {
 
 	public static ServiceOperationResult<SubjectDTO> getSubjectByCode(String code) {
 		ServiceOperationResult<SubjectDTO> result = new ServiceOperationResult<SubjectDTO>(Error, "");
-		if (code != null && isNumeric(code)) {
+		if (code != null && isNumerical(code)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<Subject> dal = SubjectDAL.getDAL(conn);
+				I_SubjectDAL dal = SubjectDAL.getDAL(conn);
 				List<Subject> subjects = dal.getById(Integer.valueOf(code));
 				if (!subjects.isEmpty()) {
 					for (Subject subject : subjects) {
@@ -66,7 +66,7 @@ public class SubjectService {
 			Subject s = new Subject(subject);
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<Subject> dal = SubjectDAL.getDAL(conn);
+				I_SubjectDAL dal = SubjectDAL.getDAL(conn);
 				if (dal.getById(s.getId()).isEmpty() && dal.create(s) > 0) {
 					result.setResultType(Success);
 					result.setResultMsg("La materia se agregó correctamente");
@@ -84,10 +84,10 @@ public class SubjectService {
 
 	public static ServiceOperationResult<SubjectDTO> deleteSubject(String code) {
 		ServiceOperationResult<SubjectDTO> result = new ServiceOperationResult<SubjectDTO>(Error, "");
-		if (code != null && isNumeric(code)) {
+		if (code != null && isNumerical(code)) {
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<Subject> dal = SubjectDAL.getDAL(conn);
+				I_SubjectDAL dal = SubjectDAL.getDAL(conn);
 				List<Subject> existing = dal.getById(Integer.valueOf(code));
 				if (!existing.isEmpty() && dal.delete(existing.get(0)) > 0) {
 					result.setResultType(Success);
@@ -110,7 +110,7 @@ public class SubjectService {
 			Subject s = new Subject(subject);
 			try {
 				Connection conn = DBConnectionManager.getConnection(ConnectionPropertiesLoader.load());
-				CRUD<Subject> dal = SubjectDAL.getDAL(conn);
+				I_SubjectDAL dal = SubjectDAL.getDAL(conn);
 				if (!dal.getById(s.getId()).isEmpty() && dal.update(s) > 0) {
 					result.setResultType(Success);
 					result.setResultMsg("La materia se actualizó correctamente");

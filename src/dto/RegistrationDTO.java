@@ -2,10 +2,12 @@ package dto;
 
 public class RegistrationDTO {
 
+	private String id;
 	private SubjectDTO subject;
 	private UserDTO user;
 
-	public RegistrationDTO(SubjectDTO subjcet, UserDTO user) {
+	public RegistrationDTO(String id, SubjectDTO subjcet, UserDTO user) {
+		this.id = id;
 		this.subject = subjcet;
 		this.user = user;
 	}
@@ -16,5 +18,9 @@ public class RegistrationDTO {
 
 	public UserDTO getUser() {
 		return user;
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 }

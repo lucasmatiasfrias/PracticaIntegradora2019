@@ -1,4 +1,4 @@
-package persistence.dal;
+package persistence.dal.impl;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,32 +9,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.User;
+import persistence.dal.interfaces.I_UserDAL;
 
-public final class UserDAL extends CRUD<User> {
-	
+public final class UserDAL implements I_UserDAL {
+	private static final String DB_TABLE_NAME = "student";
+	private static final String SELECT_ALL_QUERY = "SELECT file, dni, firstname, lastname, email, gender FROM "
+			+ DB_TABLE_NAME;
+	private static final String SELECT_BY_FILE_QUERY = SELECT_ALL_QUERY + " WHERE file=?";
+	private static final String SELECT_BY_DNI_QUERY = SELECT_ALL_QUERY + " WHERE dni=?";
+	private static final String INSERT_QUERY = "INSERT INTO " + DB_TABLE_NAME
+			+ " (file, dni, firstname, lastname, email, gender) VALUES (?,?,?,?,?,?)";
+	private static final String UPDATE_QUERY = "UPDATE " + DB_TABLE_NAME
+			+ " SET dni=?, firstname=?, lastname=?, email=?, gender=? WHERE file=?";
+	private static final String DELETE_QUERY = "DELETE FROM " + DB_TABLE_NAME + " WHERE file=?";
+
 	private static UserDAL dal;
 	private Connection conn;
-	
+
 	private UserDAL(Connection conn) {
-		this.conn=conn;
-		dbTableName = "student";
-		selectAllQuery = "SELECT file, dni, firstname, lastname, email, gender FROM " + dbTableName;
-		selectByIdQuery = selectAllQuery + " WHERE file=?";
-		insertQuery = "INSERT INTO " + dbTableName + " (file, dni, firstname, lastname, email, gender) VALUES (?,?,?,?,?,?)";
-		updateQuery = "UPDATE " + dbTableName + " SET dni=?, firstname=?, lastname=?, email=?, gender=? WHERE file=?";
-		deleteQuery = "DELETE FROM " + dbTableName + " WHERE file=?";
+		this.conn = conn;
 	}
 
 	public static UserDAL getDAL(Connection conn) throws SQLException {
-		if(dal==null||dal.conn.isClosed())
-			dal=new UserDAL(conn);
+		if (dal == null || dal.conn.isClosed())
+			dal = new UserDAL(conn);
 		return dal;
 	}
-	
+
 	public List<User> getById(Integer id) throws SQLException, ClassNotFoundException, IOException {
 		List<User> users = new ArrayList<User>();
-		PreparedStatement ps = this.conn.prepareStatement(this.selectByIdQuery);
+		PreparedStatement ps = this.conn.prepareStatement(SELECT_BY_FILE_QUERY);
 		ps.setInt(1, id);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			users.add(fromRsToDto(rs));
+		}
+		rs.close();
+		ps.close();
+		return users;
+	}
+
+	@Override
+	public List<User> getByDNI(Integer dni) throws SQLException, ClassNotFoundException, IOException {
+		List<User> users = new ArrayList<User>();
+		PreparedStatement ps = this.conn.prepareStatement(SELECT_BY_DNI_QUERY);
+		ps.setInt(1, dni);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			users.add(fromRsToDto(rs));
@@ -46,7 +65,7 @@ public final class UserDAL extends CRUD<User> {
 
 	public List<User> getAll() throws SQLException, ClassNotFoundException, IOException {
 		List<User> users = new ArrayList<User>();
-		PreparedStatement ps = this.conn.prepareStatement(this.selectAllQuery);
+		PreparedStatement ps = this.conn.prepareStatement(SELECT_ALL_QUERY);
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			users.add(fromRsToDto(rs));
@@ -57,7 +76,7 @@ public final class UserDAL extends CRUD<User> {
 	}
 
 	public int create(User t) throws SQLException, ClassNotFoundException, IOException {
-		PreparedStatement ps = this.conn.prepareStatement(this.insertQuery);
+		PreparedStatement ps = this.conn.prepareStatement(INSERT_QUERY);
 		ps.setInt(1, t.getFile());
 		ps.setInt(2, t.getDni());
 		ps.setString(3, t.getFirstname());
@@ -70,7 +89,7 @@ public final class UserDAL extends CRUD<User> {
 	}
 
 	public int delete(User t) throws SQLException, ClassNotFoundException, IOException {
-		PreparedStatement ps = this.conn.prepareStatement(this.deleteQuery);
+		PreparedStatement ps = this.conn.prepareStatement(DELETE_QUERY);
 		ps.setInt(1, t.getFile());
 		int r = ps.executeUpdate();
 		ps.close();
@@ -78,7 +97,7 @@ public final class UserDAL extends CRUD<User> {
 	}
 
 	public int update(User newT) throws SQLException, ClassNotFoundException, IOException {
-		PreparedStatement ps = this.conn.prepareStatement(this.updateQuery);
+		PreparedStatement ps = this.conn.prepareStatement(UPDATE_QUERY);
 		ps.setInt(1, newT.getDni());
 		ps.setString(2, newT.getFirstname());
 		ps.setString(3, newT.getLastname());

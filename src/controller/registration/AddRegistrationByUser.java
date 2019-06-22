@@ -52,23 +52,25 @@ public class AddRegistrationByUser extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		String responseMsg;
 		String json = request.getParameter("json");
-		if(json!=null&&!json.isEmpty()) {
+		if (json != null && !json.isEmpty()) {
 			try {
 				JsonParser parser = new JsonParser();
 				JsonObject obj = (JsonObject) parser.parse(json);
-				String studentFile=obj.get("studentFile").toString();
-				List<String> subjectsIds= new ArrayList<String>();
-				for(JsonElement e: obj.get("subjectsIds").getAsJsonArray()) {
+				String studentFile = obj.get("studentFile").toString();
+				List<String> subjectsIds = new ArrayList<String>();
+				for (JsonElement e : obj.get("subjectsIds").getAsJsonArray()) {
 					subjectsIds.add(e.getAsString());
 				}
-				ServiceOperationResult<RegistrationDTO> res=RegistrationService.addRegistration(studentFile, subjectsIds);
-				if(!res.getResultType().equals(Success)) {
-					response.sendRedirect("/PracticaIntegradoraUnpaz2019/Inscripciones");
-				}
-			}catch (Exception e) {
-				
+				ServiceOperationResult<RegistrationDTO> res = RegistrationService.addRegistrations(studentFile,
+						subjectsIds);
+				responseMsg = res.getResultMsg();
+			} catch (Exception e) {
+				responseMsg = e.getLocalizedMessage();
 			}
+			response.getWriter().write(responseMsg+";./Inscripciones");
 		}
 	}
 
